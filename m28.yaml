@@ -2,12 +2,10 @@ openapi: 3.0.0
 servers:
   - url: https://api.m28.gobizdev.com/external
     description: staging
-  - url: https://fulfilment.mygobiz.net/external
-    description: ubox
 info:
   description: ubox
   version: "1.0.0"
-  title: m28 External API
+  title: M28 External API
   contact:
     email: vuduythanh@gobiz.vn
   license:
