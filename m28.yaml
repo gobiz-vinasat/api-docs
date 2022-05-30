@@ -31,17 +31,14 @@ paths:
               type: object
               required:
                 - code
-                - password
-                - re_password
+                - password                
                 - email
                 - location
               properties:
                 code:
                   type: string
                 password:
-                  type: string
-                re_password:
-                  type: string
+                  type: string                
                 email:
                   type: string
                 location:
