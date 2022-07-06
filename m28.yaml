@@ -45,7 +45,7 @@ paths:
                 email:
                   type: string
                 phone:
-                  type: number
+                  type: string
                 location:
                   type: string
                   example:
