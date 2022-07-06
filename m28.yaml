@@ -33,16 +33,19 @@ paths:
               type: object
               required:
                 - code
-                - password                
+                - password
                 - email
                 - location
+                - phone
               properties:
                 code:
                   type: string
                 password:
-                  type: string                
+                  type: string
                 email:
                   type: string
+                phone:
+                  type: number
                 location:
                   type: string
                   example:
@@ -215,6 +218,10 @@ paths:
                 properties:
                   stock:
                     $ref: '#/components/schemas/Stock'
+                  warehouse:
+                    $ref: '#/components/schemas/Warehouse'
+                  warehouse_area:
+                    $ref: '#/components/schemas/WarehouseArea'
         '400':
           description: INPUT_INVALID
           content:
@@ -342,6 +349,22 @@ paths:
                 properties:
                   order:
                     $ref: '#/components/schemas/Order'
+                  products:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+                  services:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Service'
+                  shipping_partner:
+                    $ref: '#/components/schemas/ShippingPartner'
+                  freight_bills:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FreightBill'
+                  warehouse:
+                    $ref: '#/components/schemas/Warehouse'
         '400':
           description: INPUT_INVALID
           content:
