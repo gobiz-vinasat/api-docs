@@ -24,6 +24,47 @@ tags:
     description: Module shipping partners calls
 
 paths:
+  /orders/fix-stocks:
+    post:
+      security:
+        - bearerAuth: [ ]
+      tags:
+        - orders
+      summary: Sửa tồn do sai sót khi trừ tồn trên đơn
+      operationId: orderFixStock
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tenant_code
+                - order_codes
+              properties:
+                tenant_code:
+                  type: string
+                order_codes:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: INPUT_INVALID
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  data:
+                    type: object
   /orders/auto-inspection:
     post:
       security:
