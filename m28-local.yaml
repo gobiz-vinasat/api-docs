@@ -47,116 +47,70 @@ tags:
     description: Chứng từ kiểm kê hàng trong kho
   - name: document-importing-return-goods
     description: Chứng từ nhập hàng hoàn
+  - name: purchasing-packages
+    description: Kiện nhập
   - name: stocks
-    description: Module stocks calls
-  - name: services
-    description: Module services calls
+    description: Tồn kho
 
 paths:
 
-  /stocks/change-position-stocks:
-    post:
+  /stocks/export-storage-fees:
+    get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - stocks
-      summary: change position stock
-      operationId: stockChangeWarehouseArea
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - warehouse_id
-                - warehouse_area_id
-                - stocks
-              properties:
-                warehouse_id:
-                  type: number
-                warehouse_area_id:
-                  type: number
-                stocks:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      stock_id:
-                        type: number
-                      quantity:
-                        type: number
-                      warehouse_area_id:
-                        type: number
+      summary: Download danh sách phí lưu kho sku theo ngày
+      operationId: stockExportStorageFee
+      parameters:
+        - in: query
+          name: merchant_id
+          schema:
+            type: number
+        - in: query
+          name: warehouse_id
+          schema:
+            type: number
+        - in: query
+          name: closing_time[from]
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+              example:
+                "2021-07-07"
+        - in: query
+          name: closing_time[to]
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+              example:
+                "2021-07-07"
+
       responses:
         '200':
           description: OK
           content:
-            application/json:
+            application/vnd.ms-excel:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: string
+                type: string
+                format: binarydownlao
 
-  /services:
-    post:
+  /purchasing-packages/{id}/add-items:
+    put:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
-        - services
-      summary: Tạo dịch vụ
-      operationId: serviceCreate
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - country_id
-                - type
-                - code
-                - name
-              properties:
-                country_id:
-                  type: number
-                type:
-                  type: string
-                  example:
-                    'IMPORT|EXPORT|TRANSPORT|IMPORTING_RETURN_GOODS|STORAGE|EXTENT'
-                code:
-                  type: string
-                name:
-                  type: string
-                auto_price_by:
-                  type: string
-                  example:
-                    'SIZE|VOLUME|SELLER'
-                status:
-                  type: string
-                  example:
-                    'ACTIVE|INACTIVE'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  service_price:
-                    type: object
-
-  /services/{service_id}/service-prices:
-    post:
-      security:
-        - bearerAuth: [ ]
-      tags:
-        - services
-      summary: Tạo đơn giá dịch vụ
-      operationId: serviceCreateServicePrice
+        - purchasing-packages
+      summary: Thêm sản phẩm cho kiện nhập
+      operationId: purchasingPackageAddItems
       parameters:
         - in: path
-          name: service_id
+          name: id
+          required: true
           schema:
             type: number
       requestBody:
@@ -165,35 +119,17 @@ paths:
             schema:
               type: object
               required:
-                - label
-                - price
+                - package_items
               properties:
-                label:
-                  type: string
-                price:
-                  type: number
-                yield_price:
-                  type: number
-                note:
-                  type: string
-                height:
-                  type: number
-                width:
-                  type: number
-                length:
-                  type: number
-                volume:
-                  type: number
-                seller_codes:
+                package_items:
                   type: array
                   items:
-                    type: string
-                seller_refs:
-                  type: array
-                  items:
-                    type: string
-                deduct:
-                  type: number
+                    type: object
+                    properties:
+                      sku_id:
+                        type: number
+                      quantity:
+                        type: number
       responses:
         '200':
           description: OK
@@ -201,9 +137,12 @@ paths:
             application/json:
               schema:
                 type: object
-                properties:
-                  service_price:
-                    type: object
+        '400':
+          description: INPUT_INVALID
+          content:
+            application/json:
+              schema:
+                type: object
 
   /document-importing-return-goods/scan:
     get:
