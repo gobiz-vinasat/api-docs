@@ -22,6 +22,8 @@ tags:
     description: Module orders calls
   - name: shipping-partners
     description: Module shipping partners calls
+  - name: products
+      description: Module products
 
 paths:
   /orders/fix-stocks:
@@ -300,6 +302,56 @@ paths:
                     type: string
                     example:
                       'sucess'
+        '400':
+          description: INPUT_INVALID
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /skus/{sku_code}/update:
+    post:
+      security:
+      - bearerAuth: []
+      tags:
+      - products
+      summary: Cập nhật tên biến thể
+      operationId: SkuUpdateName
+      description: Cập nhật tên biến thể
+      parameters:
+      - in: path
+        required: true
+        name: sku_code
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - tenant_code
+              - merchant_code
+              - name
+              properties:
+                tenant_code:
+                  type: string
+                merchant_code:
+                  type: string
+                name:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example:
+                      'success'
         '400':
           description: INPUT_INVALID
           content:
