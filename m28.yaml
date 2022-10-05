@@ -2,7 +2,7 @@ openapi: 3.0.0
 servers:
   - url: https://api.m28.gobizdev.com/external
     description: staging
-  - url: https://api-fulfilment.mygobiz.net/external
+  - url: https://fulfilment.mygobiz.net/external
     description: production
 info:
   description: ubox
