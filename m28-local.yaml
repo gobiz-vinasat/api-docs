@@ -27,6 +27,37 @@ tags:
 
 paths:
   /service-packs:
+    get:
+      security:
+        - bearerAuth: [ ]
+      tags:
+        - service-packs
+      summary: listing service pack
+      operationId: servicePackIndex
+      parameters:
+        - in: query
+          name: country_id
+          schema:
+            type: number
+        - in: query
+          name: paginate
+          schema:
+            type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  service_packs:
+                    type: array
+                    items:
+                      type: object
+                  paginate:
+                    type: object
+
     post:
       security:
         - bearerAuth: [ ]
@@ -55,6 +86,33 @@ paths:
                   type: array
                   items:
                     type: number
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  service_pack:
+                    type: object
+                  service_pack_prices:
+                    type: array
+                    items:
+                      type: object
+  /service-packs/{id}:
+    get:
+      security:
+        - bearerAuth: [ ]
+      tags:
+        - service-packs
+      summary: view a service pack
+      operationId: servicePackDetail
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
       responses:
         200:
           description: OK
