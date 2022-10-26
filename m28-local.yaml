@@ -127,6 +127,39 @@ paths:
                     type: array
                     items:
                       type: object
+    put:
+      security:
+        - bearerAuth: [ ]
+      tags:
+        - service-packs
+      summary: update a service pack, add or remove price
+      operationId: servicePackUpdate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                note:
+                  type: string
+                service_price_ids:
+                  type: array
+                  items:
+                    type: number
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  service_pack:
+                    type: object
+                  service_pack_prices:
+                    type: array
+                    items:
+                      type: object
 
   /stocks/change-position-stocks:
     post:
