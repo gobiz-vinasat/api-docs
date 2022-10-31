@@ -160,6 +160,44 @@ paths:
                     type: array
                     items:
                       type: object
+  /service-packs/{id}/add-sellers:
+    post:
+      security:
+        - bearerAuth: [ ]
+      tags:
+        - service-packs
+      summary: add seller to a service pack
+      operationId: servicePackaddSeller
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                seller_ids:
+                  type: array
+                  items:
+                    type: number
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  service_pack:
+                    type: object
+                  service_pack_prices:
+                    type: array
+                    items:
+                      type: object
+
 
   /stocks/change-position-stocks:
     post:
