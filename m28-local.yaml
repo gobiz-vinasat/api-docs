@@ -22,10 +22,69 @@ tags:
     description: Module services calls
   - name: service-packs
     description: Module service-packs
+  - name: service-combos
+    description: Module service-combos
   - name: purchasing-packages
     description: Module purchasingPackages calls
 
 paths:
+  /service-combos:
+    post:
+      security:
+        - bearerAuth: [ ]
+      tags:
+        - service-combos
+      summary: create a service combo
+      operationId: serviceComboCreate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                service_pack_id:
+                  type: number
+                  required: true
+                code:
+                  type: string
+                  required: true
+                name:
+                  type: string
+                  required: true
+                note:
+                  type: string
+                using_days:
+                  type: number
+                  required: true
+                using_skus:
+                  type: number
+                  required: true
+                suggest_price:
+                  type: number
+                  required: true
+                service_price_quotas:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      service_price_id:
+                        type: number
+                      quota:
+                        type: number
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  service_pack:
+                    type: object
+                  service_pack_prices:
+                    type: array
+                    items:
+                      type: object
   /service-packs:
     get:
       security:
