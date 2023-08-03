@@ -1,424 +1,1406 @@
-openapi: 3.0.0
-servers:
-  - url: https://api.m28.gobizdev.com/external
-    description: staging
-  - url: https://fulfilment.mygobiz.net/external
-    description: production
+openapi: 3.0.3
 info:
-  description: ubox
-  version: "1.0.0"
-  title: M28 External API
-  contact:
-    email: vuduythanh@gobiz.vn
-  license:
-    name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
-tags:
-  - name: merchants
-    description: Module merchants calls
-
+  title: M28 Public Api
+  version: 1.0.0
+  contact: {}
+servers:
+  - url: https://dev-3-api.m28.gobizdev.com
+  - url: https://dev-1-api.m28.gobizdev.com
+  - url: https://api.m28.gobizdev.com
+  - url: https://fulfilment.mygobiz.net
 paths:
-  /merchants:
-    post:
-      security:
-        - bearerAuth: [ ]
-      tags:
-        - merchants
-      summary: create a mechant
-      operationId: createMerchant
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - code
-                - password
-                - email
-                - location
-                - phone
-              properties:
-                code:
-                  type: string
-                password:
-                  type: string
-                email:
-                  type: string
-                phone:
-                  type: string
-                location:
-                  type: string
-                  example:
-                    vietnam|thailand
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  merchant:
-                    $ref: '#/components/schemas/Merchant'
-        '400':
-          description: INPUT_INVALID
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      domain:
-                        type: string
-                        example:
-                          exists
-                      username:
-                        type: string
-                        example:
-                          already_exist
-                      location:
-                        type: string
-                        example:
-                          invalid
-
-  /merchants/{merchant_code}/products:
-    post:
-      security:
-        - bearerAuth: [ ]
-      tags:
-        - merchants
-      summary: create a product
-      operationId: createProduct
-      parameters:
-        - in: path
-          name: merchant_code
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - name
-                - password
-                - re_password
-                - email
-                - location
-              properties:
-                name:
-                  type: string
-                code:
-                  type: string
-                image:
-                  type: string
-                  format: binary
-                  example:
-                    base64image
-                weight:
-                  type: number
-                height:
-                  type: number
-                width:
-                  type: number
-                length:
-                  type: number
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  merchant:
-                    $ref: '#/components/schemas/Product'
-        '400':
-          description: INPUT_INVALID
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: string
-                  data:
-                    type: object
-  /merchants/{merchant_code}/products/{product_code}:
+  /api/orders:
     get:
-      security:
-        - bearerAuth: [ ]
       tags:
-        - merchants
-      summary: product detail
-      operationId: detailProduct
+        - Staging
+        - Order
+      summary: Get Orders
+      description: Get Orders
+      operationId: getOrders1
       parameters:
-        - in: path
-          name: merchant_code
-          required: true
+        - name: code
+          in: query
           schema:
             type: string
-        - in: path
-          name: product_code
-          required: true
+            example: v0DAISY8qzLCGOU5
+        - name: sku_code
+          in: query
           schema:
             type: string
+            example: AUTOTEST_002
+        - name: created_from
+          in: query
+          schema:
+            type: string
+            example: '2021-12-15'
+        - name: created_to
+          in: query
+          schema:
+            type: string
+            example: '2022-04-30'
+        - name: tracking_number
+          in: query
+          schema:
+            type: string
+            example: YT2227821266032876
+        - name: status
+          in: query
+          schema:
+            type: string
+            example: WAITING_PROCESSING
+        - name: include
+          in: query
+          schema:
+            type: string
+            example: shipping_info,creator,order_skus.sku,warehouse
+        - name: per_page
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: page
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: auto
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  product:
-                    $ref: '#/components/schemas/Product'
-        '400':
-          description: INPUT_INVALID
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: string
-                  data:
-                    type: object
-  /merchants/{merchant_code}/products/{product_code}/stocks:
-    get:
-      security:
-        - bearerAuth: [ ]
+          description: ''
+    put:
       tags:
-        - merchants
-      summary: stock of a product
-      operationId: stockOfProduct
-      parameters:
-        - in: path
-          name: merchant_code
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: product_code
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  stock:
-                    $ref: '#/components/schemas/Stock'
-                  warehouse:
-                    $ref: '#/components/schemas/Warehouse'
-                  warehouse_area:
-                    $ref: '#/components/schemas/WarehouseArea'
-        '400':
-          description: INPUT_INVALID
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: string
-                  data:
-                    type: object
-  /merchants/{merchant_code}/orders:
-    post:
-      security:
-        - bearerAuth: [ ]
-      tags:
-        - merchants
-      summary: create a order
-      operationId: createOrder
-      parameters:
-        - in: path
-          name: merchant_code
-          required: true
-          schema:
-            type: string
+        - Staging
+        - Order
+      summary: Update Order
+      description: Update Order
+      operationId: updateOrder1
       requestBody:
         content:
           application/json:
             schema:
               type: object
-              required:
-                - code
-                - receiver_name
-                - receiver_address
-                - receiver_phone
-                - warehouse_code
-                - products
               properties:
+                cancel_reason:
+                  type: string
+                  example: huy nha
                 code:
                   type: string
-                freight_bill:
+                  example: VELAONE_1676608145
+                merchant_code:
                   type: string
-                receiver_name:
+                  example: amz
+                receiver_postal_code:
                   type: string
-                receiver_address:
+                  example: '0099900'
+                ref_code:
                   type: string
-                receiver_phone:
-                  type: string
-                warehouse_code:
-                  type: string
-                products:
+                  example: OZJ9SYZAI
+                skus:
                   type: array
                   items:
                     type: object
                     properties:
                       code:
                         type: string
-                      price:
-                        type: number
-                      quantity:
-                        type: number
+                        example: sku1671509270078
                       discount_amount:
                         type: number
-                shipping_partner_code:
-                  type: string
-                discount_amount:
-                  type: number
+                        example: 0
+                      price:
+                        type: number
+                        example: 30000
+                      quantity:
+                        type: number
+                        example: 2
+                  example:
+                    - code: sku1671509270078
+                      discount_amount: 0
+                      price: 30000
+                      quantity: 2
                 total_amount:
                   type: number
+                  example: 15000
+            example:
+              cancel_reason: huy nha
+              code: VELAONE_1676608145
+              merchant_code: amz
+              receiver_postal_code: '0099900'
+              ref_code: OZJ9SYZAI
+              skus:
+                - code: sku1671509270078
+                  discount_amount: 0
+                  price: 30000
+                  quantity: 2
+              total_amount: 15000
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+        - Staging
+        - Order
+      summary: create test
+      description: create test
+      operationId: createTest
+      parameters:
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: cpo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                campaign:
+                  type: string
+                  example: campaigndemo
                 description:
                   type: string
+                  example: note tạm
+                discount_amount:
+                  type: number
+                  example: 10000
+                freight_bill_code:
+                  type: string
+                  example: ''
+                intended_delivery_at:
+                  type: string
+                  example: '2023-01-02T21:11:59Z'
+                payment:
+                  type: object
+                  properties:
+                    bank_account:
+                      type: string
+                      example: sdadads
+                    bank_name:
+                      type: string
+                      example: asdasd
+                    payment_amount:
+                      type: string
+                      example: '100000'
+                    payment_method:
+                      type: string
+                      example: BANK_TRANSFER
+                    payment_note:
+                      type: string
+                      example: Quisquam
+                    payment_time:
+                      type: string
+                      example: '2023-04-14T02:19:47.446Z'
+                    payment_type:
+                      type: string
+                      example: ADVANCE_PAYMENT
+                    standard_code:
+                      type: string
+                      example: aaa
+                receiver_address:
+                  type: string
+                  example: Trieu Khuc
+                receiver_country_code:
+                  type: string
+                  example: thailand
                 receiver_district_code:
                   type: string
+                  example: THAI_118786
+                receiver_name:
+                  type: string
+                  example: Hoang Long
+                receiver_phone:
+                  type: string
+                  example: '0396822222'
+                receiver_postal_code:
+                  type: string
+                  example: '00999009998'
                 receiver_province_code:
                   type: string
-                receiver_ward_code:
+                  example: THAI_118785
+                ref_code:
                   type: string
+                  example: aloha12kjllllh
+                shipping_partner_code:
+                  type: string
+                  example: HN-01
+                skus:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: sku1677643632232
+                      discount_amount:
+                        type: number
+                        example: 1000
+                      price:
+                        type: number
+                        example: 123444
+                      quantity:
+                        type: number
+                        example: 2
+                  example:
+                    - code: sku1677643632232
+                      discount_amount: 1000
+                      price: 123444
+                      quantity: 2
+                total_amount:
+                  type: number
+                  example: 300000
+            example:
+              campaign: campaigndemo
+              description: note tạm
+              discount_amount: 10000
+              freight_bill_code: ''
+              intended_delivery_at: '2023-01-02T21:11:59Z'
+              payment:
+                bank_account: sdadads
+                bank_name: asdasd
+                payment_amount: '100000'
+                payment_method: BANK_TRANSFER
+                payment_note: Quisquam
+                payment_time: '2023-04-14T02:19:47.446Z'
+                payment_type: ADVANCE_PAYMENT
+                standard_code: aaa
+              receiver_address: Trieu Khuc
+              receiver_country_code: thailand
+              receiver_district_code: THAI_118786
+              receiver_name: Hoang Long
+              receiver_phone: '0396822222'
+              receiver_postal_code: '00999009998'
+              receiver_province_code: THAI_118785
+              ref_code: aloha12kjllllh
+              shipping_partner_code: HN-01
+              skus:
+                - code: sku1677643632232
+                  discount_amount: 1000
+                  price: 123444
+                  quantity: 2
+              total_amount: 300000
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  order:
-                    $ref: '#/components/schemas/Order'
-        '400':
-          description: INPUT_INVALID
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: string
-                  data:
-                    type: object
-  /merchants/{merchant_code}/orders/{order_code}:
+          description: ''
+  /api/products:
     get:
-      security:
-        - bearerAuth: [ ]
       tags:
-        - merchants
-      summary: order detail
-      operationId: detailOrder
+        - Staging
+        - Product
+      summary: Get Products
+      description: Get Products
+      operationId: getProducts1
       parameters:
-        - in: path
-          name: merchant_code
-          required: true
+        - name: include
+          in: query
           schema:
             type: string
-        - in: path
-          name: order_code
-          required: true
+            example: merchant,creator,skus
+        - name: per_page
+          in: query
           schema:
             type: string
+            example: '1'
+        - name: page
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: amz
+        - name: name
+          in: query
+          schema:
+            type: string
+            example: Test product
+        - name: category_id
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: code
+          in: query
+          schema:
+            type: string
+            example: '1000010187821943'
+        - name: lack_of_export_goods
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: out_of_stock
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: nearly_sold_out
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: not_yet_in_stock
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: status
+          in: query
+          schema:
+            type: string
+            example: STOP_SELLING
+        - name: warehouse_code
+          in: query
+          schema:
+            type: string
+            example: aloha
+        - name: created_from
+          in: query
+          schema:
+            type: string
+            example: '2022-10-20'
+        - name: created_to
+          in: query
+          schema:
+            type: string
+            example: '2023-04-03'
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  order:
-                    $ref: '#/components/schemas/Order'
-                  products:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Product'
-                  services:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Service'
-                  shipping_partner:
-                    $ref: '#/components/schemas/ShippingPartner'
-                  freight_bills:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/FreightBill'
-                  warehouse:
-                    $ref: '#/components/schemas/Warehouse'
-        '400':
-          description: INPUT_INVALID
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: string
-                  data:
+          description: ''
+    post:
+      tags:
+        - Staging
+        - Product
+      summary: Create Product
+      description: Create Product
+      operationId: createProduct1
+      parameters:
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: amz
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category_id:
+                  type: number
+                  example: 12
+                code:
+                  type: string
+                  example: SKUAlohademoaaarra
+                description:
+                  type: string
+                  example: Demo sản phẩm
+                height:
+                  type: number
+                  example: 10
+                length:
+                  type: number
+                  example: 30
+                name:
+                  type: string
+                  example: aloha
+                price:
+                  type: number
+                  example: 1000
+                weight:
+                  type: number
+                  example: 0.5
+                width:
+                  type: number
+                  example: 20
+            example:
+              category_id: 12
+              code: SKUAlohademoaaarra
+              description: Demo sản phẩm
+              height: 10
+              length: 30
+              name: aloha
+              price: 1000
+              weight: 0.5
+              width: 20
+      responses:
+        '200':
+          description: ''
+  /api/products/10362:
+    get:
+      tags:
+        - Staging
+        - Product
+      summary: Get Product Detail
+      description: Get Product Detail
+      operationId: getProductDetail1
+      parameters:
+        - name: include
+          in: query
+          schema:
+            type: string
+            example: merchant,creator,skus,services,service_prices
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: auto
+      responses:
+        '200':
+          description: ''
+  /api/products/10366:
+    put:
+      tags:
+        - Staging
+        - Product
+      summary: Update Product
+      description: Update Product
+      operationId: updateProduct1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  example: alohar12446767676
+                description:
+                  type: string
+                  example: demo aloha loha
+                height:
+                  type: number
+                  example: 10
+                length:
+                  type: number
+                  example: 30
+                name:
+                  type: string
+                  example: Aloha
+                price:
+                  type: number
+                  example: 1000
+                weight:
+                  type: number
+                  example: 0.5
+                width:
+                  type: number
+                  example: 20
+            example:
+              code: alohar12446767676
+              description: demo aloha loha
+              height: 10
+              length: 30
+              name: Aloha
+              price: 1000
+              weight: 0.5
+              width: 20
+      responses:
+        '200':
+          description: ''
+  /api/products/10376/images:
+    post:
+      tags:
+        - Staging
+        - Product
+      summary: Add Product Imges
+      description: Add Product Imges
+      operationId: addProductImges1
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                files:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: ''
+  /api/sku-combos:
+    get:
+      tags:
+        - Staging
+        - Sku Combo
+      summary: Sku Combo Listing
+      description: Sku Combo Listing
+      operationId: skuComboListing
+      parameters:
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: cpo
+        - name: code
+          in: query
+          schema:
+            type: string
+            example: alohahehe
+        - name: sku_code
+          in: query
+          schema:
+            type: string
+            example: '1000010187821940'
+        - name: name
+          in: query
+          schema:
+            type: string
+            example: aloha
+        - name: created_from
+          in: query
+          schema:
+            type: string
+            example: '2023-01-01'
+        - name: created_to
+          in: query
+          schema:
+            type: string
+            example: '2023-02-01'
+        - name: per_page
+          in: query
+          schema:
+            type: string
+            example: '1'
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+        - Staging
+        - Sku Combo
+      summary: Add Sku Combo
+      description: Add Sku Combo
+      operationId: addSkuCombo1
+      parameters:
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: amz
+        - name: code
+          in: query
+          schema:
+            type: string
+            example: '131035'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category_id:
+                  type: number
+                  example: 1
+                code:
+                  type: string
+                  example: ALOHACODE1
+                name:
+                  type: string
+                  example: Sku combo demo
+                price:
+                  type: number
+                  example: 30000
+                skus:
+                  type: array
+                  items:
                     type: object
+                    properties:
+                      code:
+                        type: string
+                        example: ukS9nBrDciip1VC79hoEPV8CRrFDO3
+                      quantity:
+                        type: number
+                        example: 4
+                  example:
+                    - code: ukS9nBrDciip1VC79hoEPV8CRrFDO3
+                      quantity: 4
+                    - code: Ax52UkcjxrPzhua194tFeCR5p8NLGt
+                      quantity: 2
+                source:
+                  type: string
+                  example: VELAONE
+            example:
+              category_id: 1
+              code: ALOHACODE1
+              name: Sku combo demo
+              price: 30000
+              skus:
+                - code: ukS9nBrDciip1VC79hoEPV8CRrFDO3
+                  quantity: 4
+                - code: Ax52UkcjxrPzhua194tFeCR5p8NLGt
+                  quantity: 2
+              source: VELAONE
+      responses:
+        '200':
+          description: ''
+  /external/merchants/list-seller:
+    get:
+      tags:
+        - Staging
+        - Seller
+      summary: List Seller Production
+      description: List Seller Production
+      operationId: listSellerProduction1
+      parameters:
+        - name: username
+          in: query
+          schema:
+            type: string
+            example: gobi
+        - name: filter_all
+          in: query
+          schema:
+            type: string
+            example: '1'
+      responses:
+        '200':
+          description: ''
+  /api/warehouses:
+    get:
+      tags:
+        - Staging
+        - Warehoue
+      summary: List Warehouse
+      description: List Warehouse
+      operationId: listWarehouse1
+      parameters:
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: auto
+        - name: code
+          in: query
+          schema:
+            type: string
+            example: fhuh
+      responses:
+        '200':
+          description: ''
+  /api/purchasing-packages:
+    get:
+      tags:
+        - Staging
+        - Purchasing Package
+      summary: List Purchasing Package
+      description: List Purchasing Package
+      operationId: listPurchasingPackage1
+      parameters:
+        - name: code
+          in: query
+          schema:
+            type: string
+            example: ZQuZXKtO
+        - name: created_at[from]
+          in: query
+          schema:
+            type: string
+            example: '2021-12-09'
+        - name: created_at[to]
+          in: query
+          schema:
+            type: string
+            example: '2021-12-10'
+        - name: destination_warehouse_id
+          in: query
+          schema:
+            type: string
+            example: '31'
+        - name: freight_bill_code
+          in: query
+          schema:
+            type: string
+            example: vd09122021
+        - name: shipping_partner_id
+          in: query
+          schema:
+            type: string
+            example: '3'
+        - name: sku_code
+          in: query
+          schema:
+            type: string
+            example: bongden1
+        - name: status
+          in: query
+          schema:
+            type: string
+            example: INIT
+          description: >
+            INIT // Khởi tạo, đối với kiện lô chưa về kho
 
-components:
-  securitySchemes:
-    Authorization:
-      in: header
-      name: Authorization
-      type: apiKey
-    bearerAuth:
-      type: http
-      scheme: bearer
-  schemas:
-    Merchant:
-      type: object
-      properties:
-        id:
-          type: number
-        code:
-          type: string
-        name:
-          type: string
-        username:
-          type: string
-        phone:
-          type: string
-        address:
-          type: string
-        ref:
-          type: string
-        description:
-          type: string
-        status:
-          type: boolean
-        created_at:
-          type: string
-        updated_at:
-          type: string
+            PUTAWAY // Kiện về kho, kiện vừa được chuyển đến kho và tạo kiện
+            thành công trên hệ thống
 
-    Product:
-      type: object
+            TRANSPORTING // Vận chuyển
 
-    Stock:
-      type: object
+            READY_FOR_DELIVERY // Chờ giao
 
-    Order:
-      type: object
+            REQUEST_FOR_DELIVERY // Yêu cầu giao
 
+            DELIVERING // Đang giao
+
+            DELIVERED // Đã nhận
+
+            MIA // Thất lạc kiện bị mất nói chung, hiện tại không tìm thấy
+
+            INACTIVE // Ngừng hoạt động không áp dụng tính phí và không rơi vào
+            những trường hợp không tính phí khác
+
+            WAIT_FOR_RETURN // Chờ trả hàng
+
+            RETURNING // Đang trả hàng
+
+            RETURNED // Đã trả hàng
+
+            WAIT_FOR_LIQUIDATION // Chờ thanh lý
+
+            LIQUIDATED // Đã thanh lý
+
+            REFUSED // Khách không nhận
+
+            IMPORTED // Đã nhập kho
+
+            CANCELED // Hủy
+        - name: include
+          in: query
+          schema:
+            type: string
+            example: >-
+              destination_warehouse.country,purchasing_package_services.service,purchasing_package_services.service_price,purchasing_package_item.sku
+          description: Dữ liệu lấy có thể optional theo nhu cầu
+        - name: per_page
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: page
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: amz
+        - name: sort_by
+          in: query
+          schema:
+            type: string
+            example: created_at
+          description: |-
+            Trường sắp xếp - Hỗ trợ:
+
+            created_at: thời gian tạo
+            updated_at: thời gian cập nhật
+            imported_at: thời gian nhập kho
+        - name: sort_by_value
+          in: query
+          schema:
+            type: string
+            example: DESC
+          description: 'Giá trị sắp xếp: DESC hoặc ASC'
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+        - Staging
+        - Purchasing Package
+      summary: Create PurchasingPackage
+      description: Create PurchasingPackage
+      operationId: createPurchasingpackage
+      parameters:
+        - name: include
+          in: query
+          schema:
+            type: string
+            example: purchasing_package_item.sku
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                destination_warehouse_id:
+                  type: number
+                  example: 46
+                freight_bill_code:
+                  type: string
+                  example: ssassassasasdssdsdaaasdaaddd
+                merchant_code:
+                  type: string
+                  example: amz
+                note:
+                  type: string
+                  example: asd
+                package_items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      quantity:
+                        type: number
+                        example: 1
+                      sku_id:
+                        type: number
+                        example: 17121
+                  example:
+                    - quantity: 1
+                      sku_id: 17121
+                service_ids:
+                  type: array
+                  items:
+                    type: number
+                    example: 41
+                  example:
+                    - 41
+                shipping_partner_id:
+                  type: number
+                  example: 2
+                weight:
+                  type: number
+                  example: 0.001
+            example:
+              destination_warehouse_id: 46
+              freight_bill_code: ssassassasasdssdsdaaasdaaddd
+              merchant_code: amz
+              note: asd
+              package_items:
+                - quantity: 1
+                  sku_id: 17121
+              service_ids:
+                - 41
+              shipping_partner_id: 2
+              weight: 0.001
+      responses:
+        '200':
+          description: ''
+  /api/purchasing-packages/834/cancel:
+    put:
+      tags:
+        - Staging
+        - Purchasing Package
+      summary: Cancel Purchasing Package
+      description: Cancel Purchasing Package
+      operationId: cancelPurchasingPackage1
+      parameters:
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: amz
+      responses:
+        '200':
+          description: ''
+  /api/purchasing-manager:
+    get:
+      tags:
+        - Staging
+        - Purchasing Manager
+      summary: Purchasing Account
+      description: Purchasing Account
+      operationId: purchasingAccount1
+      parameters:
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: amz
+        - name: include
+          in: query
+          schema:
+            type: string
+            example: purchasing_service
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+        - Staging
+        - Purchasing Manager
+      summary: Purchasing Account Create
+      description: Purchasing Account Create
+      operationId: purchasingAccountCreate1
+      parameters:
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: amz
+        - name: include
+          in: query
+          schema:
+            type: string
+            example: purchasing_service
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  example: 0350MwGjTiI4C8O8o61/VA==
+                pin_code:
+                  type: string
+                  example: 0350MwGjTiI4C8O8o61/VA==
+                purchasing_service_id:
+                  type: number
+                  example: 2
+                username:
+                  type: string
+                  example: chillies
+            example:
+              password: 0350MwGjTiI4C8O8o61/VA==
+              pin_code: 0350MwGjTiI4C8O8o61/VA==
+              purchasing_service_id: 2
+              username: chillies
+      responses:
+        '200':
+          description: ''
+  /api/purchasing-manager/purchasing-services:
+    get:
+      tags:
+        - Staging
+        - Purchasing Manager
+      summary: Purchasing Services
+      description: Purchasing Services
+      operationId: purchasingServices1
+      parameters:
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: amz
+      responses:
+        '200':
+          description: ''
+  /api/purchasing-manager/9:
+    delete:
+      tags:
+        - Staging
+        - Purchasing Manager
+      summary: Purchasing Account Delete
+      description: Purchasing Account Delete
+      operationId: purchasingAccountDelete1
+      parameters:
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: auto
+      responses:
+        '200':
+          description: ''
+  /api/purchasing-order/28789:
+    get:
+      tags:
+        - Staging
+        - Purchasing Order
+      summary: Detail Purchasing Order
+      description: Detail Purchasing Order
+      operationId: detailPurchasingOrder
+      parameters:
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: amz
+        - name: include
+          in: query
+          schema:
+            type: string
+            example: purchasing_order_items.purchasing_variant.sku,purchasing_packages
+      responses:
+        '200':
+          description: ''
+    put:
+      tags:
+        - Staging
+        - Purchasing Order
+      summary: Update Purchasing Order
+      description: Update Purchasing Order
+      operationId: updatePurchasingOrder1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+                  example: 5403
+                is_putaway:
+                  type: number
+                  example: 1
+                merchant_code:
+                  type: string
+                  example: amz
+                warehouse_id:
+                  type: number
+                  example: 47
+            example:
+              id: 5403
+              is_putaway: 1
+              merchant_code: amz
+              warehouse_id: 47
+      responses:
+        '200':
+          description: ''
+  /api/stores:
+    get:
+      tags:
+        - Staging
+        - Store
+      summary: Listing
+      description: Listing
+      operationId: listing1
+      parameters:
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: xternal
+        - name: include
+          in: query
+          schema:
+            type: string
+            example: warehouse
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+        - Staging
+        - Store
+      summary: Connect macketplace
+      description: Connect macketplace
+      operationId: connectMacketplace1
+      parameters:
+        - name: channel
+          in: query
+          schema:
+            type: string
+            example: SHOPBASE
+        - name: warehouse_id
+          in: query
+          schema:
+            type: string
+            example: '01'
+        - name: shop_name
+          in: query
+          schema:
+            type: string
+            example: au-ecom-sign-in
+        - name: client_id
+          in: query
+          schema:
+            type: string
+            example: b62960eb859eed4c8651c30a58215cf8
+        - name: secret_key
+          in: query
+          schema:
+            type: string
+            example: 0b8044e2e5dc5e0ac1cbd728f094f17133c66a8ba49c9fd815d432374a8c8fa3
+        - name: shared_secret
+          in: query
+          schema:
+            type: string
+            example: 20b07f67fe55e477922b71a151e4bf6d
+        - name: url
+          in: query
+          schema:
+            type: string
+            example: http://google.com.vn
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: xternal
+      responses:
+        '200':
+          description: ''
+  /api/stores/59/sync-products:
+    post:
+      tags:
+        - Staging
+        - Store
+      summary: Sync Product
+      description: Sync Product
+      operationId: syncProduct1
+      responses:
+        '200':
+          description: ''
+  /api/stores/78:
+    delete:
+      tags:
+        - Staging
+        - Store
+      summary: Delete
+      description: Delete
+      operationId: delete1
+      responses:
+        '200':
+          description: ''
+  /api/categories:
+    get:
+      tags:
+        - Staging
+        - Category
+      summary: Listing
+      description: Listing
+      operationId: listing2
+      parameters:
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: amz
+        - name: code
+          in: query
+          schema:
+            type: string
+            example: '131035'
+      responses:
+        '200':
+          description: ''
+  /api/sku-combos/29:
+    put:
+      tags:
+        - Staging
+        - Sku Combo
+      summary: Update Sku Combo
+      description: Update Sku Combo
+      operationId: updateSkuCombo1
+      parameters:
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: amz
+        - name: code
+          in: query
+          schema:
+            type: string
+            example: '131035'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category_id:
+                  type: number
+                  example: 1
+                code:
+                  type: string
+                  example: ALOHACODE
+                name:
+                  type: string
+                  example: Sku combo demo
+                price:
+                  type: number
+                  example: 30000
+                skus:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: ukS9nBrDciip1VC79hoEPV8CRrFDO3
+                      quantity:
+                        type: number
+                        example: 4
+                  example:
+                    - code: ukS9nBrDciip1VC79hoEPV8CRrFDO3
+                      quantity: 4
+                    - code: Ax52UkcjxrPzhua194tFeCR5p8NLGt
+                      quantity: 4
+                source:
+                  type: string
+                  example: VELAONE
+            example:
+              category_id: 1
+              code: ALOHACODE
+              name: Sku combo demo
+              price: 30000
+              skus:
+                - code: ukS9nBrDciip1VC79hoEPV8CRrFDO3
+                  quantity: 4
+                - code: Ax52UkcjxrPzhua194tFeCR5p8NLGt
+                  quantity: 4
+              source: VELAONE
+      responses:
+        '200':
+          description: ''
+  /api/orders/380542:
+    get:
+      tags:
+        - Staging
+        - Order
+      summary: Get Detail Order
+      description: Get Detail Order
+      operationId: getDetailOrder1
+      parameters:
+        - name: include
+          in: query
+          schema:
+            type: string
+            example: >-
+              shipping_info,creator,order_skus.sku,warehouse,order_sku_combos.sku_combo
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: amz
+      responses:
+        '200':
+          description: ''
+  /api/purchasing-packages/834:
+    get:
+      tags:
+        - Staging
+        - Purchasing Package
+      summary: Detail Purchasing Package
+      description: Detail Purchasing Package
+      operationId: detailPurchasingPackage1
+      parameters:
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: amz
+        - name: include
+          in: query
+          schema:
+            type: string
+            example: >-
+              purchasing_package_item,merchant,destination_warehouse.country,purchasing_package_services.service,purchasing_package_services.service_price,purchasing_package_item.sku
+          description: Dữ liệu lấy có thể optional theo nhu cầu
+      responses:
+        '200':
+          description: ''
+  /api/purchasing-order:
+    get:
+      tags:
+        - Staging
+        - Purchasing Order
+      summary: List Purchasing Order
+      description: List Purchasing Order
+      operationId: listPurchasingOrder
+      parameters:
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: amz
+        - name: purchasing_account_id
+          in: query
+          schema:
+            type: string
+            example: '27'
+      responses:
+        '200':
+          description: ''
+  /api/purchasing-order/18745/items/75896/mapping:
+    get:
+      tags:
+        - Staging
+        - Purchasing Order
+      summary: Mapping sku
+      description: Mapping sku
+      operationId: mappingSku1
+      parameters:
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: amz
+        - name: sku_id
+          in: query
+          schema:
+            type: string
+            example: '414'
+        - name: id
+          in: query
+          schema:
+            type: string
+            example: '18745'
+        - name: item_id
+          in: query
+          schema:
+            type: string
+            example: '75896'
+      responses:
+        '200':
+          description: ''
+  /oauth/marketplaces/TIKTOKSHOP/oauth-url:
+    get:
+      tags:
+        - Staging
+        - Store
+      summary: Connect macketplace auth
+      description: Connect macketplace auth
+      operationId: connectMacketplaceAuth1
+      parameters:
+        - name: url
+          in: query
+          schema:
+            type: string
+            example: https://google.com
+        - name: warehouse_id
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: channel
+          in: query
+          schema:
+            type: string
+            example: TIKTOKSHOP
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: xternal
+      responses:
+        '200':
+          description: ''
+  /api/stores/59/warehouse:
+    put:
+      tags:
+        - Staging
+        - Store
+      summary: Update Warehouse
+      description: Update Warehouse
+      operationId: updateWarehouse1
+      parameters:
+        - name: warehouse_id
+          in: query
+          schema:
+            type: string
+            example: '1'
+      responses:
+        '200':
+          description: ''
+tags:
+  - name: Staging
+  - name: Order
+  - name: Product
+  - name: Seller
+  - name: Warehoue
+  - name: Purchasing Package
+  - name: Purchasing Manager
+  - name: Purchasing Order
+  - name: Store
+  - name: Category
+  - name: Sku Combo
