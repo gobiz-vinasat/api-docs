@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: M6 API
+  title: M6 Agency API
   version: 1.0.0
   contact: {}
 servers:
