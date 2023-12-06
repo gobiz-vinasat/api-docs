@@ -14,7 +14,7 @@ components:
 security:
   - bearerAuth: []
 paths:
-  /agency-api/orders:
+  /orders:
     post:
       summary: Create Order API
       description: Create Order API 
@@ -357,7 +357,7 @@ paths:
       responses:
         '200':
           description: ''
-  /agency-api/orders/{order_code}:
+  /orders/{order_code}:
     put:
       summary: Update Order API
       description: Update Order API
