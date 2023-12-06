@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: M6 Agency API
+  title: M6 API
   version: 1.0.0
   contact: {}
 servers:
@@ -11,10 +11,11 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+      description: "Dùng Token:<br>Agency nhaphang: <br>eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IjcwRHdFdWxrOU5oQTJkSGNZQUJSVGJFV1AyYURneXpKaV9tekdYV1U1WXcifQ.eyJpc3MiOiJodHRwczovL29pZGMtdm5zLmdvYml6ZGV2LmNvbSIsImF1ZCI6InRlc3QiLCJqdGkiOiI3YzJlYTM1ZC0zMzUyLTQ2NTUtODU5Ni00ZDMxYmE0NGQxNzUiLCJpYXQiOjE3MDE4MzM0NDEsImV4cCI6MTg1OTUxMzQ0MSwiYWdlbmN5X2lkIjozLCJhZ2VuY3lfY29kZSI6Im5oYXBoYW5nIiwicGFydG5lcl9pZCI6MSwicGFydG5lcl9jb2RlIjoieGxvZ2lzdGljcyIsInNjb3BlIjoiY3JlYXRvcjo1MCIsInN1YiI6IjUwIn0.qp_GoegjY8HNIlZgt8jHRoNhlV0onxc9GY7pHOBMO-Ckgoqzmy17znMlJo_BItQygZCqY9QeHzDGdUYfVEcMG0R4ujHmB67gJ7IHp06ujy0hw_Hve2viBkeqXoFlinxFKXfoT5_JhKJHWuplHrQrOhD570VyNgwwQD8cTJJSf2lF0vT8ZB0SuX4m-yCQ5RBZvDhF7FWTg7rrhChsisQ0FhdjKfxuOudj1u2GKe6w3sL6-uMKShpFZesH3gaG5XovMUUaX9JR3ZAKZyGJCJ6b019551vFdhJhk_ptF47nyxU3xvY5LLNvujFchXfXgCjQKXDCKd8LjEfL-vnO1GYpXA<br>Agency baogam:<br>eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IjcwRHdFdWxrOU5oQTJkSGNZQUJSVGJFV1AyYURneXpKaV9tekdYV1U1WXcifQ.eyJpc3MiOiJodHRwczovL29pZGMtdm5zLmdvYml6ZGV2LmNvbSIsImF1ZCI6InRlc3QiLCJqdGkiOiJkZjRmMTNjYS0yNDIzLTQyOTQtOGE5My03ODk0YWNiYWYyY2EiLCJpYXQiOjE3MDE4MzM2OTMsImV4cCI6MTg1OTUxMzY5MywiYWdlbmN5X2lkIjo0LCJhZ2VuY3lfY29kZSI6ImJhb2dhbSIsInBhcnRuZXJfaWQiOjEsInBhcnRuZXJfY29kZSI6Inhsb2dpc3RpY3MiLCJzY29wZSI6ImNyZWF0b3I6NTEiLCJzdWIiOiI1MSJ9.xfmuIJ_NWPqR-_Z4EQdvHSIuU_assVpw1z8nHwJpEvQpc276ct0kOixMoOLggBuKeyvTGj22Dzhk9WsNP1Xb7CAaA2iCynfqfq5d3VLV2bp1Y2HglBmSdzjKlGe0RAzIpGUqXf1up2OF-yeiW6EZv0oGFxf6Wl08zKDNP-FtpRkXq6TRsNpnMiIRHZmQkqZS8-I1JiY8VmeifpDbmy-mnRQ718HXi0YKIrV-FzwR5uvrUGH8aSeGVX8aGGmjaGxXk4LMYXOxxmP00-bnTn5KnVy4mrpUUVtUqk0LgIvyk5U2M6yps5t0l7kPItHeZUnjKJQbEpP60bjTdCrOBQG88A"
 security:
   - bearerAuth: []
 paths:
-  /orders:
+  /agency-api/orders:
     post:
       summary: Create Order API
       description: Create Order API 
@@ -357,7 +358,58 @@ paths:
       responses:
         '200':
           description: ''
-  /orders/{order_code}:
+          content: 
+            application/json:
+               example:
+                 id: 31121
+                 code: code123101911199
+                 customer_name: Son Trinh
+                 customer_username: alohauser78
+                 customer_code: M6_REECAL
+                 customer_phone: '0900900800'
+                 receiver_name: Dong Vi
+                 receiver_phone: '0900999000'
+                 receiver_address: dia chi nhan hang
+                 receiver_country: vietnam
+                 receiver_district: '350'
+                 receiver_ward: ''
+                 receiver_note: note nhe
+                 agency:
+                   id: 3
+                   id_partner: 1
+                   id_location: 0
+                   code: ffm
+                   name: ffm
+                   address: ''
+                   inherit: true
+                   active: true
+                   created_at: null
+                   updated_at: '2021-04-26T14:48:43+07:00'
+                   id_warehouse_service_plan: 1
+                   volume_calculation: TOTAL
+                 partner:
+                   id: 1
+                   code: baogam
+                   domain: baogam.m6.gobizdev.com
+                 customer:
+                   id: 1337
+                   code: M6_REECAL
+                   username: alohauser78
+                   address: null
+                   full_name: Son Trinh
+                   phone: '0900900800'
+                   email: ''
+                 items:
+                   data: []
+                 packages:
+                   data: []
+                 services:
+                   data: []
+                 properties:
+                   data: []
+                 
+                   
+  /agency-api/orders/{order_code}:
     put:
       summary: Update Order API
       description: Update Order API
@@ -702,6 +754,55 @@ paths:
       responses:
         '200':
           description: ''
+          content: 
+            application/json:
+               example:
+                 id: 31121
+                 code: code123101911199
+                 customer_name: Son Trinh
+                 customer_username: alohauser78
+                 customer_code: M6_REECAL
+                 customer_phone: '0900900800'
+                 receiver_name: Dong Vi
+                 receiver_phone: '0900999000'
+                 receiver_address: dia chi nhan hang
+                 receiver_country: vietnam
+                 receiver_district: '350'
+                 receiver_ward: ''
+                 receiver_note: note nhe
+                 agency:
+                   id: 3
+                   id_partner: 1
+                   id_location: 0
+                   code: ffm
+                   name: ffm
+                   address: ''
+                   inherit: true
+                   active: true
+                   created_at: null
+                   updated_at: '2021-04-26T14:48:43+07:00'
+                   id_warehouse_service_plan: 1
+                   volume_calculation: TOTAL
+                 partner:
+                   id: 1
+                   code: baogam
+                   domain: baogam.m6.gobizdev.com
+                 customer:
+                   id: 1337
+                   code: M6_REECAL
+                   username: alohauser78
+                   address: null
+                   full_name: Son Trinh
+                   phone: '0900900800'
+                   email: ''
+                 items:
+                   data: []
+                 packages:
+                   data: []
+                 services:
+                   data: []
+                 properties:
+                   data: []
   /packages:
     get:
       summary: Get List Packages API
@@ -721,6 +822,80 @@ paths:
       responses:
         '200':
           description: ''
+          content: 
+            application/json:
+               example:
+                 packages:
+                   - id: 22126
+                     code: HKT152801603
+                     id_agency: 3
+                     id_order: 37060
+                     height: 0.8
+                     id_bag: 0
+                     id_warehouse_current: 1
+                     width: 0.6
+                     weight_net: 9
+                     weight_converted: 48
+                     weight_box: 0
+                     weight: 0
+                     barcode: '43654869769'
+                     type: RELATED
+                     status_transport: PUTAWAY
+                     created_at: '2023-11-07T15:10:01.000Z'
+                     updated_at: '2023-11-07T15:12:21.000Z'
+                     status: ''
+                     volume: 0.384
+                     customer_receive: aaaa
+                     customer_address_destination: '123'
+                     customer_id_city_destination: 35
+                     customer_id_country_destination: 11935
+                     customer_id_district_destination: 284
+                     customer_id_ward_destination: 0
+                     customer_note: ''
+                     customer_phone_destination: '0962002753'
+                     bag: null
+                     agency:
+                       id: 3
+                       id_partner: 1
+                       id_location: 0
+                       id_warehouse_service_plan: 1
+                       code: nhaphang
+                       address: ''
+                       inherit: 1
+                       active: 1
+                       created_at: null
+                     customer:
+                       id: 1779
+                       id_agency: 3
+                       code: DE8563
+                       username: tungns
+                       address: null
+                       email: ''
+                       full_name: aaaa
+                       phone: '0962002753'
+                       type: RELATED
+                     order:
+                       id: 37060
+                       code: DE8563_119071
+                       status: PURCHASED
+                       customer_name: aaaa
+                       customer_username: tungns
+                       customer_code: DE8563
+                       staff_note: null
+                       id_agency: 3
+                       created_at: '2023-11-07T09:24:00.000Z'
+                       updated_at: '2023-11-07T15:09:27.000Z'
+                       freight_bills:
+                         - id: 82056
+                           id_order: 37060
+                           freight_bill: '43654869769'
+                     shipping_partners:
+                       id: 25
+                       name: DA_Test
+                       code: DA_Test
+                       address: Apt. 653 226 Yost Glen, Lucileside, OH 60406-0275
+                 total: 1
+                 
   /packages/{package_id}:
     get:
       summary: Get Package Details API
@@ -735,6 +910,80 @@ paths:
       responses:
         '200':
           description: ''
+          content: 
+            application/json:
+               example:
+                 res:
+                   id: 22126
+                   code: HKT152801603
+                   id_agency: 3
+                   id_order: 37060
+                   height: 0.8
+                   id_bag: 0
+                   id_warehouse_current: 1
+                   width: 0.6
+                   weight_net: 9
+                   weight_converted: 48
+                   weight_box: 0
+                   weight: 0
+                   barcode: '43654869769'
+                   type: RELATED
+                   status_transport: PUTAWAY
+                   created_at: '2023-11-07T15:10:01.000Z'
+                   updated_at: '2023-11-07T15:12:21.000Z'
+                   status: ''
+                   volume: 0.384
+                   customer_receive: aaaa
+                   customer_address_destination: '123'
+                   customer_id_city_destination: 35
+                   customer_id_country_destination: 11935
+                   customer_id_district_destination: 284
+                   customer_id_ward_destination: 0
+                   customer_note: ''
+                   customer_phone_destination: '0962002753'
+                   bag: null
+                   agency:
+                     id: 3
+                     id_partner: 1
+                     id_location: 0
+                     id_warehouse_service_plan: 1
+                     code: nhaphang
+                     address: ''
+                     inherit: 1
+                     active: 1
+                     created_at: null
+                   package_items: []
+                   customer:
+                     id: 1779
+                     id_agency: 3
+                     code: DE8563
+                     username: tungns
+                     address: null
+                     email: ''
+                     full_name: aaaa
+                     phone: '0962002753'
+                     type: RELATED
+                   shipping_partners:
+                     id: 25
+                     name: DA_Test
+                     code: DA_Test
+                     address: Apt. 653 226 Yost Glen, Lucileside, OH 60406-0275
+                   order:
+                     id: 37060
+                     code: DE8563_119071
+                     status: PURCHASED
+                     customer_name: aaaa
+                     customer_username: tungns
+                     customer_code: DE8563
+                     staff_note: null
+                     id_agency: 3
+                     created_at: '2023-11-07T09:24:00.000Z'
+                     updated_at: '2023-11-07T15:09:27.000Z'
+                     freight_bills:
+                       - id: 82056
+                         id_order: 37060
+                         freight_bill: '43654869769'
+                 
   /bags:
     get:
       summary: Get List Bags API
@@ -789,6 +1038,67 @@ paths:
       responses:
         '200':
           description: ''
+          content: 
+            application/json:
+               example:
+                 bags:
+                   - id: 4165
+                     code: H460501
+                     id_partner: 1
+                     id_agency: 6
+                     id_bag_area: 7
+                     id_customer: 0
+                     id_shipping_user: 0
+                     id_shipping_partner: 25
+                     id_warehouse_current: 35
+                     id_warehouse_input: 35
+                     id_warehouse_destination: 2
+                     status: NEW
+                     fixed_code: '460501'
+                     receiver_name: haiyen
+                     receiver_phone: '0978422807'
+                     status_warehouse: IN
+                     type: MULTIPLE
+                     note: ''
+                     note_to_customer: ''
+                     weight_real: 11
+                     weight_package: 10
+                     num_package: 1
+                     volume: 0
+                     height: 0
+                     width: 0
+                     length: 0
+                     storage_fee: null
+                     time_scan: '2023-12-05T10:46:17.000Z'
+                     shipping_at: null
+                     completed_at: null
+                     archived_at: null
+                     created_at: '2023-12-05T10:46:17.000Z'
+                     updated_at: '2023-12-05T10:46:45.000Z'
+                     shipping_partner:
+                       id: 25
+                       name: DA_Test
+                       code: DA_Test
+                       address: Apt. 653 226 Yost Glen, Lucileside, OH 60406-0275
+                     warehouse_current:
+                       id: 35
+                       name: Kho K-China
+                       code: K-China
+                       address: Kho được setup bằng automation
+                     warehouse_input:
+                       id: 35
+                       name: Kho K-China
+                       code: K-China
+                       address: Kho được setup bằng automation
+                     warehouse_destination:
+                       id: 2
+                       name: Kho Hà Nội
+                       code: K-HN
+                       address: Kho được setup bằng automation
+                     customer: null
+                     properties: []
+                 total: 1
+                 
   /bags/{bag_id}:
     get:
       summary: Get Mid-mile Bag Details API
@@ -803,6 +1113,109 @@ paths:
       responses:
         '200':
           description: ''
+          content: 
+            application/json:
+               example:
+                 bag:
+                   id: 4165
+                   code: H460501
+                   id_partner: 1
+                   id_agency: 6
+                   id_bag_area: 7
+                   id_customer: 0
+                   id_shipping_user: 0
+                   id_shipping_partner: 25
+                   id_warehouse_current: 35
+                   id_warehouse_input: 35
+                   id_warehouse_destination: 2
+                   status: NEW
+                   fixed_code: '460501'
+                   receiver_name: haiyen
+                   receiver_phone: '0978422807'
+                   status_warehouse: IN
+                   type: MULTIPLE
+                   note: ''
+                   note_to_customer: ''
+                   weight_real: 11
+                   weight_package: 10
+                   num_package: 1
+                   volume: 0
+                   height: 0
+                   width: 0
+                   length: 0
+                   storage_fee: null
+                   time_scan: '2023-12-05T10:46:17.000Z'
+                   shipping_at: null
+                   completed_at: null
+                   archived_at: null
+                   created_at: '2023-12-05T10:46:17.000Z'
+                   updated_at: '2023-12-05T10:46:45.000Z'
+                   shipping_partner:
+                     id: 25
+                     name: DA_Test
+                     code: DA_Test
+                     address: Apt. 653 226 Yost Glen, Lucileside, OH 60406-0275
+                   warehouse_current:
+                     id: 35
+                     name: Kho K-China
+                     code: K-China
+                     address: Kho được setup bằng automation
+                   warehouse_input:
+                     id: 35
+                     name: Kho K-China
+                     code: K-China
+                     address: Kho được setup bằng automation
+                   warehouse_destination:
+                     id: 2
+                     name: Kho Hà Nội
+                     code: K-HN
+                     address: Kho được setup bằng automation
+                   customer: null
+                   properties: []
+                   packages:
+                     - id: 28242
+                       code: mvd6666688912
+                       id_agency: 6
+                       id_order: 57963
+                       height: 0
+                       id_bag: 4165
+                       id_warehouse_current: 35
+                       width: 0
+                       weight_net: 10
+                       weight_converted: 0
+                       weight_box: 0
+                       weight: 0
+                       barcode: mvd6666688912
+                       type: RELATED
+                       status_transport: PUTAWAY
+                       created_at: '2023-12-05T10:43:35.000Z'
+                       updated_at: '2023-12-05T10:46:30.000Z'
+                       status: ''
+                       volume: 0
+                       customer_receive: Hoang Yen
+                       customer_address_destination: dc
+                       customer_id_city_destination: 61
+                       customer_id_country_destination: 11935
+                       customer_id_district_destination: 709
+                       customer_id_ward_destination: 9478
+                       customer_note: null
+                       customer_phone_destination: '0978422807'
+                       order:
+                         id: 57963
+                         code: LZZgFpE5AFM9IgUR
+                         status: MERCHANT_DELIVERING
+                         customer_name: yen_demo1
+                         customer_username: yen_demo1
+                         customer_code: yen_demo1
+                         staff_note: null
+                         id_agency: 6
+                         created_at: '2023-12-05T10:41:20.000Z'
+                         updated_at: '2023-12-05T10:41:20.000Z'
+                         freight_bills:
+                           - id: 196520
+                             id_order: 57963
+                             freight_bill: mvd6666688912
+                 
   /delivery-requests:
     get:
       summary: Get List Delivery Request API
@@ -827,4 +1240,79 @@ paths:
       responses:
         '200':
           description: ''
+          content: 
+            application/json:
+               example:
+                 delivery_requests:
+                   - id: 1447
+                     id_partner: 1
+                     id_agency: 4
+                     id_customer: 1794
+                     id_warehouse: 2
+                     code: Y00ZAB
+                     receiver_name: Phùng Thị Hằng
+                     receiver_phone: '0375708890'
+                     address: Số 1 Đại lộ Thăng Long
+                     note: ''
+                     status: NEW
+                     created_at: '2023-12-02T10:48:29.000Z'
+                     updated_at: '2023-12-02T10:48:29.000Z'
+                     agency:
+                       id: 4
+                       id_partner: 1
+                       id_location: 0
+                       id_warehouse_service_plan: 2
+                       code: baogam
+                       address: ''
+                       inherit: 1
+                       active: 1
+                       created_at: null
+                     warehouse:
+                       id: 2
+                       name: Kho Hà Nội
+                       code: K-HN
+                       address: Kho được setup bằng automation
+                     customer:
+                       id: 1794
+                       id_agency: 4
+                       code: M706
+                       username: phunghang
+                       address: số 2
+                       email: phungthihang@gobiz.vn
+                       full_name: Phùng Thị Hằng
+                       phone: '0375708890'
+                       type: RELATED
+                     delivery_notes: []
+                     packages:
+                       - id: 17779
+                         code: HKT142900003
+                         id_agency: 2
+                         id_order: 21927
+                         height: 1
+                         id_bag: 3988
+                         id_warehouse_current: 2
+                         width: 2
+                         weight_net: 2
+                         weight_converted: 666.667
+                         weight_box: 0
+                         weight: 2
+                         barcode: HELLO 1
+                         type: RELATED
+                         status_transport: REQUEST_FOR_DELIVERY
+                         created_at: '2023-07-31T11:29:27.000Z'
+                         updated_at: '2023-12-02T10:48:29.000Z'
+                         status: ''
+                         volume: 4
+                         customer_receive: Long
+                         customer_address_destination: 123 Cầu giấy, Phường Quan Hoa, Quận Cầu Giấy, Thành phố Hà Nội
+                         customer_id_city_destination: 35
+                         customer_id_country_destination: 11935
+                         customer_id_district_destination: 739
+                         customer_id_ward_destination: 11246
+                         customer_note: ''
+                         customer_phone_destination: '0396833553'
+                     total_package: 1
+                     total_package_weight: 666.667
+                 total: 1
+                 
 tags: []
