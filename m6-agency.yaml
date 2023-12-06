@@ -15,7 +15,7 @@ components:
 security:
   - bearerAuth: []
 paths:
-  /agency-api/orders:
+  /orders:
     post:
       summary: Create Order API
       description: Create Order API 
@@ -407,9 +407,26 @@ paths:
                    data: []
                  properties:
                    data: []
+        '401':
+          description: 'Lỗi xác thực Token'
+          content: 
+            application/json:
+               example:
+                 code: 401
+                 data: Unauthenticated
+                 
+        '400':
+          description: 'Lỗi Validate dữ liệu đầu vào'
+          content: 
+            application/json:
+               example:
+                 code: INPUT_INVALID
+                 data:
+                   code:
+                     unique: []
                  
                    
-  /agency-api/orders/{order_code}:
+  /orders/{order_code}:
     put:
       summary: Update Order API
       description: Update Order API
@@ -803,6 +820,23 @@ paths:
                    data: []
                  properties:
                    data: []
+        '401':
+          description: 'Lỗi xác thực Token'
+          content: 
+            application/json:
+               example:
+                 code: 401
+                 data: Unauthenticated
+                 
+        '400':
+          description: 'Lỗi Validate dữ liệu đầu vào'
+          content: 
+            application/json:
+               example:
+                 code: INPUT_INVALID
+                 data:
+                   code:
+                     unique: []
   /packages:
     get:
       summary: Get List Packages API
@@ -895,6 +929,13 @@ paths:
                        code: DA_Test
                        address: Apt. 653 226 Yost Glen, Lucileside, OH 60406-0275
                  total: 1
+        '401':
+          description: 'Lỗi xác thực Token'
+          content: 
+            application/json:
+               example:
+                 code: 401
+                 data: Unauthenticated
                  
   /packages/{package_id}:
     get:
@@ -983,6 +1024,13 @@ paths:
                        - id: 82056
                          id_order: 37060
                          freight_bill: '43654869769'
+        '401':
+          description: 'Lỗi xác thực Token'
+          content: 
+            application/json:
+               example:
+                 code: 401
+                 data: Unauthenticated
                  
   /bags:
     get:
@@ -1098,6 +1146,13 @@ paths:
                      customer: null
                      properties: []
                  total: 1
+        '401':
+          description: 'Lỗi xác thực Token'
+          content: 
+            application/json:
+               example:
+                 code: 401
+                 data: Unauthenticated
                  
   /bags/{bag_id}:
     get:
@@ -1215,6 +1270,13 @@ paths:
                            - id: 196520
                              id_order: 57963
                              freight_bill: mvd6666688912
+        '401':
+          description: 'Lỗi xác thực Token'
+          content: 
+            application/json:
+               example:
+                 code: 401
+                 data: Unauthenticated
                  
   /delivery-requests:
     get:
@@ -1314,5 +1376,12 @@ paths:
                      total_package: 1
                      total_package_weight: 666.667
                  total: 1
+        '401':
+          description: 'Lỗi xác thực Token'
+          content: 
+            application/json:
+               example:
+                 code: 401
+                 data: Unauthenticated
                  
 tags: []
