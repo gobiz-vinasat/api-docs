@@ -1,0 +1,830 @@
+openapi: 3.0.3
+info:
+  title: M6 API
+  version: 1.0.0
+  contact: {}
+servers:
+  - url: https://m6-agency-api.vns.gobizdev.com
+components:
+  securitySchemes:
+    bearerAuth:            
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []
+paths:
+  /agency-api/orders:
+    post:
+      summary: Create Order API
+      description: Create Order API 
+      operationId: createOrderApi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  example: haiyen34
+                customer_name:
+                  type: string
+                  example: Son Trinh
+                customer_phone:
+                  type: string
+                  example: '0900900800'
+                customer_username:
+                  type: string
+                  example: alohauser12
+                destination_warehouse_code:
+                  type: string
+                  example: CNGZ
+                distribute_warehouse_code:
+                  type: string
+                  example: CNGZ
+                items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      brands:
+                        type: object
+                        properties:
+                          original:
+                            type: string
+                            example: thay đổi
+                          translate:
+                            type: string
+                            example: thay đổi
+                      code_item:
+                        type: string
+                        example: CODE1
+                      customer_note:
+                        type: string
+                        example: SP Test
+                      manifest_original_name:
+                        type: string
+                        example: SP Test
+                      manifest_translated_name:
+                        type: string
+                        example: SP Test
+                      materials:
+                        type: object
+                        properties:
+                          original:
+                            type: string
+                            example: thay đổi
+                          translate:
+                            type: string
+                            example: thay đổi
+                      merchant_code:
+                        type: string
+                        example: SP Test
+                      merchant_contact:
+                        type: string
+                        example: SP Test
+                      merchant_name:
+                        type: string
+                        example: SP Test
+                      order_quantity:
+                        type: number
+                        example: 1
+                      original_name:
+                        type: string
+                        example: SP Test
+                      product_image:
+                        type: string
+                        example: SP Test
+                      purchase_quantity:
+                        type: number
+                        example: 1
+                      received_quantity:
+                        type: number
+                        example: 1
+                      sku:
+                        type: string
+                        example: SP Test
+                      staff_note:
+                        type: string
+                        example: SP Test
+                      total_amount:
+                        type: number
+                        example: 2000000
+                      translated_name:
+                        type: string
+                        example: SP Test
+                      unit:
+                        type: string
+                        example: chiếc
+                      unit_price:
+                        type: number
+                        example: 100000
+                      unit_price_origin:
+                        type: number
+                        example: 200
+                      url:
+                        type: string
+                        example: http://google.com
+                      variant_properties:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              example: '1627207:28320'
+                            name:
+                              type: string
+                              example: Màu sắc
+                            originalName:
+                              type: string
+                              example: Màu sắc
+                            originalValue:
+                              type: string
+                              example: 白色
+                            value:
+                              type: string
+                              example: 白色
+                        example:
+                          - id: '1627207:28320'
+                            name: Màu sắc
+                            originalName: Màu sắc
+                            originalValue: 白色
+                            value: 白色
+                  example:
+                    - brands:
+                        original: thay đổi
+                        translate: thay đổi
+                      code_item: CODE1
+                      customer_note: SP Test
+                      manifest_original_name: SP Test
+                      manifest_translated_name: SP Test
+                      materials:
+                        original: thay đổi
+                        translate: thay đổi
+                      merchant_code: SP Test
+                      merchant_contact: SP Test
+                      merchant_name: SP Test
+                      order_quantity: 1
+                      original_name: SP Test
+                      product_image: SP Test
+                      purchase_quantity: 1
+                      received_quantity: 1
+                      sku: SP Test
+                      staff_note: SP Test
+                      total_amount: 2000000
+                      translated_name: SP Test
+                      unit: chiếc
+                      unit_price: 100000
+                      unit_price_origin: 200
+                      url: http://google.com
+                      variant_properties:
+                        - id: '1627207:28320'
+                          name: Màu sắc
+                          originalName: Màu sắc
+                          originalValue: 白色
+                          value: 白色
+                    - brands:
+                        original: thay đổi
+                        translate: thay đổi
+                      code_item: CODE2
+                      customer_note: SP Test
+                      manifest_original_name: SP Test
+                      manifest_translated_name: SP Test
+                      materials:
+                        original: thay đổi
+                        translate: thay đổi
+                      merchant_code: SP Test
+                      merchant_contact: SP Test
+                      merchant_name: SP Test
+                      order_quantity: 5
+                      original_name: SP Test 2
+                      product_image: SP Test
+                      purchase_quantity: 6
+                      received_quantity: 3
+                      sku: SP Test
+                      staff_note: SP Test
+                      total_amount: 3000000
+                      translated_name: SP Test
+                      unit: chiếc
+                      unit_price: 150000
+                      unit_price_origin: 150
+                      url: http://google.com
+                      variant_properties:
+                        - id: '1627207:28320'
+                          name: Màu sắc
+                          originalName: Màu sắc
+                          originalValue: 白色
+                          value: 白色
+                properties:
+                  type: array
+                  items:
+                    type: number
+                    example: 4
+                  example:
+                    - 4
+                    - 3
+                receiver_address:
+                  type: string
+                  example: dia chi nhan hang
+                receiver_city_code:
+                  type: string
+                  example: '48'
+                receiver_country_code:
+                  type: string
+                  example: vietnam
+                receiver_district_code:
+                  type: string
+                  example: '491'
+                receiver_name:
+                  type: string
+                  example: Dong Vi
+                receiver_note:
+                  type: string
+                  example: note nhe
+                receiver_phone:
+                  type: string
+                  example: '0988999000'
+                receiver_ward_code:
+                  type: string
+                  example: '20203'
+                services:
+                  type: array
+                  items:
+                    type: number
+                    example: 1
+                  example:
+                    - 1
+                    - 2
+                tracking_numbers:
+                  type: array
+                  items:
+                    type: string
+                    example: aloha0412
+                  example:
+                    - aloha0412
+                    - aloha1407
+            example:
+              code: haiyen34
+              customer_name: Son Trinh
+              customer_phone: '0900900800'
+              customer_username: alohauser12
+              destination_warehouse_code: CNGZ
+              distribute_warehouse_code: CNGZ
+              items:
+                - brands:
+                    original: thay đổi
+                    translate: thay đổi
+                  code_item: CODE1
+                  customer_note: SP Test
+                  manifest_original_name: SP Test
+                  manifest_translated_name: SP Test
+                  materials:
+                    original: thay đổi
+                    translate: thay đổi
+                  merchant_code: SP Test
+                  merchant_contact: SP Test
+                  merchant_name: SP Test
+                  order_quantity: 1
+                  original_name: SP Test
+                  product_image: SP Test
+                  purchase_quantity: 1
+                  received_quantity: 1
+                  sku: SP Test
+                  staff_note: SP Test
+                  total_amount: 2000000
+                  translated_name: SP Test
+                  unit: chiếc
+                  unit_price: 100000
+                  unit_price_origin: 200
+                  url: http://google.com
+                  variant_properties:
+                    - id: '1627207:28320'
+                      name: Màu sắc
+                      originalName: Màu sắc
+                      originalValue: 白色
+                      value: 白色
+                - brands:
+                    original: thay đổi
+                    translate: thay đổi
+                  code_item: CODE2
+                  customer_note: SP Test
+                  manifest_original_name: SP Test
+                  manifest_translated_name: SP Test
+                  materials:
+                    original: thay đổi
+                    translate: thay đổi
+                  merchant_code: SP Test
+                  merchant_contact: SP Test
+                  merchant_name: SP Test
+                  order_quantity: 5
+                  original_name: SP Test 2
+                  product_image: SP Test
+                  purchase_quantity: 6
+                  received_quantity: 3
+                  sku: SP Test
+                  staff_note: SP Test
+                  total_amount: 3000000
+                  translated_name: SP Test
+                  unit: chiếc
+                  unit_price: 150000
+                  unit_price_origin: 150
+                  url: http://google.com
+                  variant_properties:
+                    - id: '1627207:28320'
+                      name: Màu sắc
+                      originalName: Màu sắc
+                      originalValue: 白色
+                      value: 白色
+              properties:
+                - 4
+                - 3
+              receiver_address: dia chi nhan hang
+              receiver_city_code: '48'
+              receiver_country_code: vietnam
+              receiver_district_code: '491'
+              receiver_name: Dong Vi
+              receiver_note: note nhe
+              receiver_phone: '0988999000'
+              receiver_ward_code: '20203'
+              services:
+                - 1
+                - 2
+              tracking_numbers:
+                - aloha0412
+                - aloha1407
+      responses:
+        '200':
+          description: ''
+  /agency-api/orders/{order_code}:
+    put:
+      summary: Update Order API
+      description: Update Order API
+      operationId: updateOrderApi
+      parameters:
+        - in: path
+          name: order_code
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                customer_name:
+                  type: string
+                  example: thanh
+                customer_phone:
+                  type: string
+                  example: '0989097561'
+                customer_username:
+                  type: string
+                  example: thanh1407
+                destination_warehouse_code:
+                  type: string
+                  example: CNGZ
+                distribute_warehouse_code:
+                  type: string
+                  example: CNGZ
+                items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      brands:
+                        type: object
+                        properties:
+                          original:
+                            type: string
+                            example: thay đổi
+                          translate:
+                            type: string
+                            example: thay đổi
+                      code_item:
+                        type: string
+                        example: CODE11
+                      customer_note:
+                        type: string
+                        example: SP Test
+                      manifest_original_name:
+                        type: string
+                        example: SP Test
+                      manifest_translated_name:
+                        type: string
+                        example: SP Test
+                      materials:
+                        type: object
+                        properties:
+                          original:
+                            type: string
+                            example: thay đổi
+                          translate:
+                            type: string
+                            example: thay đổi
+                      merchant_code:
+                        type: string
+                        example: SP Test
+                      merchant_contact:
+                        type: string
+                        example: SP Test
+                      merchant_name:
+                        type: string
+                        example: SP Test
+                      order_quantity:
+                        type: number
+                        example: 1
+                      original_name:
+                        type: string
+                        example: SP Test
+                      product_image:
+                        type: string
+                        example: SP Test
+                      purchase_quantity:
+                        type: number
+                        example: 1
+                      received_quantity:
+                        type: number
+                        example: 1
+                      sku:
+                        type: string
+                        example: SP Test
+                      staff_note:
+                        type: string
+                        example: SP Test
+                      total_amount:
+                        type: number
+                        example: 2000000
+                      translated_name:
+                        type: string
+                        example: SP Test
+                      unit:
+                        type: string
+                        example: chiếc
+                      unit_price:
+                        type: number
+                        example: 100000
+                      unit_price_origin:
+                        type: number
+                        example: 200
+                      url:
+                        type: string
+                        example: http://google.com
+                      variant_properties:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              example: '1627207:28320'
+                            name:
+                              type: string
+                              example: Màu sắc
+                            originalName:
+                              type: string
+                              example: Màu sắc
+                            originalValue:
+                              type: string
+                              example: 白色
+                            value:
+                              type: string
+                              example: 白色
+                        example:
+                          - id: '1627207:28320'
+                            name: Màu sắc
+                            originalName: Màu sắc
+                            originalValue: 白色
+                            value: 白色
+                  example:
+                    - brands:
+                        original: thay đổi
+                        translate: thay đổi
+                      code_item: CODE11
+                      customer_note: SP Test
+                      manifest_original_name: SP Test
+                      manifest_translated_name: SP Test
+                      materials:
+                        original: thay đổi
+                        translate: thay đổi
+                      merchant_code: SP Test
+                      merchant_contact: SP Test
+                      merchant_name: SP Test
+                      order_quantity: 1
+                      original_name: SP Test
+                      product_image: SP Test
+                      purchase_quantity: 1
+                      received_quantity: 1
+                      sku: SP Test
+                      staff_note: SP Test
+                      total_amount: 2000000
+                      translated_name: SP Test
+                      unit: chiếc
+                      unit_price: 100000
+                      unit_price_origin: 200
+                      url: http://google.com
+                      variant_properties:
+                        - id: '1627207:28320'
+                          name: Màu sắc
+                          originalName: Màu sắc
+                          originalValue: 白色
+                          value: 白色
+                    - brands:
+                        original: thay đổi
+                        translate: thay đổi
+                      code_item: CODE31
+                      customer_note: SP Test
+                      manifest_original_name: SP Test
+                      manifest_translated_name: SP Test
+                      materials:
+                        original: thay đổi
+                        translate: thay đổi
+                      merchant_code: SP Test
+                      merchant_contact: SP Test
+                      merchant_name: SP Test
+                      order_quantity: 5
+                      original_name: SP Test 2
+                      product_image: SP Test
+                      purchase_quantity: 6
+                      received_quantity: 3
+                      sku: SP Test
+                      staff_note: SP Test
+                      total_amount: 3000000
+                      translated_name: SP Test
+                      unit: chiếc
+                      unit_price: 150000
+                      unit_price_origin: 150
+                      url: http://google.com
+                      variant_properties:
+                        - id: '1627207:28320'
+                          name: Màu sắc
+                          originalName: Màu sắc
+                          originalValue: 白色
+                          value: 白色
+                properties:
+                  type: array
+                  items:
+                    type: number
+                    example: 3
+                  example:
+                    - 3
+                    - 4
+                receiver_address:
+                  type: string
+                  example: tranphu
+                receiver_city_code:
+                  type: string
+                  example: '01'
+                receiver_country_code:
+                  type: string
+                  example: vietnam
+                receiver_district_code:
+                  type: string
+                  example: '268'
+                receiver_name:
+                  type: string
+                  example: green
+                receiver_note:
+                  type: string
+                  example: '123'
+                receiver_phone:
+                  type: string
+                  example: '0988999124'
+                receiver_ward_code:
+                  type: string
+                  example: '09544'
+                services:
+                  type: array
+                  items:
+                    type: number
+                    example: 1
+                  example:
+                    - 1
+                    - 1
+                tracking_numbers:
+                  type: array
+                  items:
+                    type: string
+                    example: aloha3
+                  example:
+                    - aloha3
+                    - aloha4
+            example:
+              customer_name: thanh
+              customer_phone: '0989097561'
+              customer_username: thanh1407
+              destination_warehouse_code: CNGZ
+              distribute_warehouse_code: CNGZ
+              items:
+                - brands:
+                    original: thay đổi
+                    translate: thay đổi
+                  code_item: CODE11
+                  customer_note: SP Test
+                  manifest_original_name: SP Test
+                  manifest_translated_name: SP Test
+                  materials:
+                    original: thay đổi
+                    translate: thay đổi
+                  merchant_code: SP Test
+                  merchant_contact: SP Test
+                  merchant_name: SP Test
+                  order_quantity: 1
+                  original_name: SP Test
+                  product_image: SP Test
+                  purchase_quantity: 1
+                  received_quantity: 1
+                  sku: SP Test
+                  staff_note: SP Test
+                  total_amount: 2000000
+                  translated_name: SP Test
+                  unit: chiếc
+                  unit_price: 100000
+                  unit_price_origin: 200
+                  url: http://google.com
+                  variant_properties:
+                    - id: '1627207:28320'
+                      name: Màu sắc
+                      originalName: Màu sắc
+                      originalValue: 白色
+                      value: 白色
+                - brands:
+                    original: thay đổi
+                    translate: thay đổi
+                  code_item: CODE31
+                  customer_note: SP Test
+                  manifest_original_name: SP Test
+                  manifest_translated_name: SP Test
+                  materials:
+                    original: thay đổi
+                    translate: thay đổi
+                  merchant_code: SP Test
+                  merchant_contact: SP Test
+                  merchant_name: SP Test
+                  order_quantity: 5
+                  original_name: SP Test 2
+                  product_image: SP Test
+                  purchase_quantity: 6
+                  received_quantity: 3
+                  sku: SP Test
+                  staff_note: SP Test
+                  total_amount: 3000000
+                  translated_name: SP Test
+                  unit: chiếc
+                  unit_price: 150000
+                  unit_price_origin: 150
+                  url: http://google.com
+                  variant_properties:
+                    - id: '1627207:28320'
+                      name: Màu sắc
+                      originalName: Màu sắc
+                      originalValue: 白色
+                      value: 白色
+              properties:
+                - 3
+                - 4
+              receiver_address: tranphu
+              receiver_city_code: '01'
+              receiver_country_code: vietnam
+              receiver_district_code: '268'
+              receiver_name: green
+              receiver_note: '123'
+              receiver_phone: '0988999124'
+              receiver_ward_code: '09544'
+              services:
+                - 1
+                - 1
+              tracking_numbers:
+                - aloha3
+                - aloha4
+      responses:
+        '200':
+          description: ''
+  /packages:
+    get:
+      summary: Get List Packages API
+      description: Get List Packages API
+      operationId: getListPackagesApi
+      parameters:
+        - name: created_at_from
+          in: query
+          schema:
+            type: string
+            example: 2023-04-16%2010%3A12%3A49
+        - name: created_at_to
+          in: query
+          schema:
+            type: string
+            example: 2023-05-16%2010%3A12%3A49
+      responses:
+        '200':
+          description: ''
+  /packages/{package_id}:
+    get:
+      summary: Get Package Details API
+      description: Get Package Details API
+      operationId: getPackageDetailsApi
+      parameters:
+        - in: path
+          name: package_id
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          description: ''
+  /bags:
+    get:
+      summary: Get List Bags API
+      description: Get List Bags API
+      operationId: getListBagsApi
+      parameters:
+        - name: code
+          in: query
+          schema:
+            type: string
+            example: '380302'
+        - name: package_code
+          in: query
+          schema:
+            type: string
+            example: HKT131000133
+        - name: order_code
+          in: query
+          schema:
+            type: string
+            example: CONONG00E8Z
+        - name: customer_code
+          in: query
+          schema:
+            type: string
+            example: F750
+        - name: customer_username
+          in: query
+          schema:
+            type: string
+            example: skynet
+        - name: freight_bill_code
+          in: query
+          schema:
+            type: string
+            example: I48F81680521117
+        - name: status
+          in: query
+          schema:
+            type: string
+            example: SHIPPING
+        - name: created_at_from
+          in: query
+          schema:
+            type: string
+            example: '2023-04-03'
+        - name: created_at_to
+          in: query
+          schema:
+            type: string
+            example: '2023-04-03'
+      responses:
+        '200':
+          description: ''
+  /bags/{bag_id}:
+    get:
+      summary: Get Mid-mile Bag Details API
+      description: Get Mid-mile Bag Details API
+      operationId: getMidMileBagDetailsApi
+      parameters:
+        - in: path
+          name: bag_id
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          description: ''
+  /delivery-requests:
+    get:
+      summary: Get List Delivery Request API
+      description: Get List Delivery Request API
+      operationId: getListDeliveryRequestApi
+      parameters:
+        - name: created_at_to
+          in: query
+          schema:
+            type: string
+            example: '2020-11-06'
+        - name: created_at_from
+          in: query
+          schema:
+            type: string
+            example: '2020-10-18'
+        - name: id
+          in: query
+          schema:
+            type: string
+            example: '13'
+      responses:
+        '200':
+          description: ''
+tags: []
