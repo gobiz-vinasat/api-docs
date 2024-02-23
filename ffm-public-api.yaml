@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   contact: {}
 servers:
-  - url: https://api.m28.gobizdev.com
+  - url: https://api.ffm.gobizdev.com
 paths:
   /api/orders:
     get:
@@ -100,33 +100,6 @@ paths:
                 intended_delivery_at:
                   type: string
                   example: '2023-01-02T21:11:59Z'
-                payment:
-                  type: object
-                  properties:
-                    bank_account:
-                      type: string
-                      example: sdadads
-                    bank_name:
-                      type: string
-                      example: asdasd
-                    payment_amount:
-                      type: string
-                      example: '100000'
-                    payment_method:
-                      type: string
-                      example: CASH
-                    payment_note:
-                      type: string
-                      example: Quisquam
-                    payment_time:
-                      type: string
-                      example: '2023-04-12T02:55:40.809Z'
-                    payment_type:
-                      type: string
-                      example: ADVANCE_PAYMENT
-                    standard_code:
-                      type: string
-                      example: aaa
                 receiver_address:
                   type: string
                   example: Trieu Khuc
@@ -568,7 +541,7 @@ paths:
   /api/warehouses:
     get:
       tags:
-        - Warehoue
+        - Warehouse
       summary: List Warehouse
       description: List Warehouse
       operationId: listWarehouse
@@ -842,6 +815,12 @@ paths:
             type: string
             example: S001
           required: true
+        - name: merchant_code
+          in: query
+          required: true
+          schema:
+            type: string
+            example: amz
       responses:
         '200':
           description: ''
@@ -868,5 +847,5 @@ security:
 tags:
   - name: Order
   - name: Product
-  - name: Warehoue
+  - name: Warehouse
   - name: Purchasing Package
