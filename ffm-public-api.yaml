@@ -1,0 +1,872 @@
+openapi: 3.0.3
+info:
+  title: FFM Public Api
+  version: 1.0.0
+  contact: {}
+servers:
+  - url: https://api.m28.gobizdev.com
+paths:
+  /api/orders:
+    get:
+      tags:
+        - Order
+      summary: Get Orders
+      description: Get Orders
+      operationId: getOrders
+      parameters:
+        - name: code
+          in: query
+          schema:
+            type: string
+            example: v0DAISY8qzLCGOU5
+        - name: sku_code
+          in: query
+          schema:
+            type: string
+            example: AUTOTEST_002
+        - name: created_from
+          in: query
+          schema:
+            type: string
+            example: '2021-12-15'
+        - name: created_to
+          in: query
+          schema:
+            type: string
+            example: '2022-04-30'
+        - name: tracking_number
+          in: query
+          schema:
+            type: string
+            example: YT2227821266032876
+        - name: status
+          in: query
+          schema:
+            type: string
+            example: WAITING_PROCESSING
+        - name: include
+          in: query
+          schema:
+            type: string
+            example: shipping_info,creator,order_skus.sku,warehouse
+        - name: per_page
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: page
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: auto
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+        - Order
+      summary: Create Order
+      description: Create Order
+      operationId: createOrder
+      parameters:
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: cpo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                campaign:
+                  type: string
+                  example: cam990088
+                description:
+                  type: string
+                  example: note tạm
+                discount_amount:
+                  type: number
+                  example: 10
+                freight_bill_code:
+                  type: string
+                  example: ''
+                intended_delivery_at:
+                  type: string
+                  example: '2023-01-02T21:11:59Z'
+                payment:
+                  type: object
+                  properties:
+                    bank_account:
+                      type: string
+                      example: sdadads
+                    bank_name:
+                      type: string
+                      example: asdasd
+                    payment_amount:
+                      type: string
+                      example: '100000'
+                    payment_method:
+                      type: string
+                      example: CASH
+                    payment_note:
+                      type: string
+                      example: Quisquam
+                    payment_time:
+                      type: string
+                      example: '2023-04-12T02:55:40.809Z'
+                    payment_type:
+                      type: string
+                      example: ADVANCE_PAYMENT
+                    standard_code:
+                      type: string
+                      example: aaa
+                receiver_address:
+                  type: string
+                  example: Trieu Khuc
+                receiver_country_code:
+                  type: string
+                  example: thailand
+                receiver_district_code:
+                  type: string
+                  example: THAI_118786
+                receiver_name:
+                  type: string
+                  example: Hoang Long
+                receiver_phone:
+                  type: string
+                  example: '0396822222'
+                receiver_postal_code:
+                  type: string
+                  example: '0099900'
+                receiver_province_code:
+                  type: string
+                  example: THAI_118785
+                ref_code:
+                  type: string
+                  example: aloha115578
+                shipping_partner_code:
+                  type: string
+                  example: HN-01
+                skus:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: sku1677643632232
+                      discount_amount:
+                        type: number
+                        example: 1000
+                      price:
+                        type: number
+                        example: 123444
+                      quantity:
+                        type: number
+                        example: 2
+                  example:
+                    - code: sku1677643632232
+                      discount_amount: 1000
+                      price: 123444
+                      quantity: 2
+                total_amount:
+                  type: number
+                  example: 300000
+            examples:
+              Create Order:
+                value:
+                  campaign: cam990088
+                  description: note tạm
+                  discount_amount: 10
+                  freight_bill_code: ''
+                  intended_delivery_at: '2023-01-02T21:11:59Z'
+                  payment:
+                    bank_account: sdadads
+                    bank_name: asdasd
+                    payment_amount: '100000'
+                    payment_method: CASH
+                    payment_note: Quisquam
+                    payment_time: '2023-04-12T02:55:40.809Z'
+                    payment_type: ADVANCE_PAYMENT
+                    standard_code: aaa
+                  receiver_address: Trieu Khuc
+                  receiver_country_code: thailand
+                  receiver_district_code: THAI_118786
+                  receiver_name: Hoang Long
+                  receiver_phone: '0396822222'
+                  receiver_postal_code: '0099900'
+                  receiver_province_code: THAI_118785
+                  ref_code: aloha115578
+                  shipping_partner_code: HN-01
+                  skus:
+                    - code: sku1677643632232
+                      discount_amount: 1000
+                      price: 123444
+                      quantity: 2
+                  total_amount: 300000
+      responses:
+        '200':
+          description: ''
+  /api/orders/{order_code}:
+    get:
+      tags:
+        - Order
+      summary: Get Detail Order
+      description: Get Detail Order
+      operationId: getDetailOrder
+      parameters:
+        - in: path
+          name: order_code
+          schema:
+            type: string
+          required: true
+          description: Order Code
+        - name: include
+          in: query
+          schema:
+            type: string
+            example: >-
+              shipping_info,creator,order_skus.sku,warehouse,order_sku_combos.sku_combo
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: amz
+      responses:
+        '200':
+          description: ''
+    put:
+      tags:
+        - Order
+      summary: Update Order
+      description: Update Order
+      operationId: updateOrder
+      parameters:
+        - in: path
+          name: order_code
+          schema:
+            type: string
+          required: true
+          description: Order Code
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cancel_reason:
+                  type: string
+                  example: huy nha
+                code:
+                  type: string
+                  example: VELAONE_1676608145
+                merchant_code:
+                  type: string
+                  example: amz
+                receiver_postal_code:
+                  type: string
+                  example: '0099900'
+                ref_code:
+                  type: string
+                  example: OZJ9SYZAI
+                skus:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: sku1671509270078
+                      discount_amount:
+                        type: number
+                        example: 0
+                      price:
+                        type: number
+                        example: 30000
+                      quantity:
+                        type: number
+                        example: 2
+                  example:
+                    - code: sku1671509270078
+                      discount_amount: 0
+                      price: 30000
+                      quantity: 2
+                total_amount:
+                  type: number
+                  example: 15000
+            examples:
+              Update Order:
+                value:
+                  cancel_reason: huy nha
+                  code: VELAONE_1676608145
+                  merchant_code: amz
+                  receiver_postal_code: '0099900'
+                  ref_code: OZJ9SYZAI
+                  skus:
+                    - code: sku1671509270078
+                      discount_amount: 0
+                      price: 30000
+                      quantity: 2
+                  total_amount: 15000
+      responses:
+        '200':
+          description: ''
+  /api/orders/{order_code}/cancel:
+    put:
+      tags:
+        - Order
+      summary: Cancel Order
+      description: Cancel Order
+      operationId: cancelOrder
+      parameters:
+        - in: path
+          name: order_code
+          schema:
+            type: string
+          required: true
+          description: Order Code
+      responses:
+        '200':
+          description: ''
+  /api/products:
+    get:
+      tags:
+        - Product
+      summary: Get Products
+      description: Get Products
+      operationId: getProducts
+      parameters:
+        - name: include
+          in: query
+          schema:
+            type: string
+            example: merchant,creator,skus
+        - name: per_page
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: page
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: amz
+        - name: name
+          in: query
+          schema:
+            type: string
+            example: Test product
+        - name: category_id
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: code
+          in: query
+          schema:
+            type: string
+            example: '1000010187821943'
+        - name: lack_of_export_goods
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: out_of_stock
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: nearly_sold_out
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: not_yet_in_stock
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: status
+          in: query
+          schema:
+            type: string
+            example: STOP_SELLING
+        - name: warehouse_code
+          in: query
+          schema:
+            type: string
+            example: aloha
+        - name: created_from
+          in: query
+          schema:
+            type: string
+            example: '2022-10-20'
+        - name: created_to
+          in: query
+          schema:
+            type: string
+            example: '2023-04-03'
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+        - Product
+      summary: Create Product
+      description: Create Product
+      operationId: createProduct
+      parameters:
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: amz
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category_id:
+                  type: number
+                  example: 12
+                code:
+                  type: string
+                  example: SKUAlohademoaaarra
+                description:
+                  type: string
+                  example: Demo sản phẩm
+                height:
+                  type: number
+                  example: 10
+                length:
+                  type: number
+                  example: 30
+                name:
+                  type: string
+                  example: aloha
+                price:
+                  type: number
+                  example: 1000
+                weight:
+                  type: number
+                  example: 0.5
+                width:
+                  type: number
+                  example: 20
+            examples:
+              Create Product:
+                value:
+                  category_id: 12
+                  code: SKUAlohademoaaarra
+                  description: Demo sản phẩm
+                  height: 10
+                  length: 30
+                  name: aloha
+                  price: 1000
+                  weight: 0.5
+                  width: 20
+      responses:
+        '200':
+          description: ''
+  /api/products/{product_code}:
+    get:
+      tags:
+        - Product
+      summary: Get Product Detail
+      description: Get Product Detail
+      operationId: getProductDetail
+      parameters:
+        - in: path
+          name: product_code
+          schema:
+            type: string
+          required: true
+          description: Product Code
+        - name: include
+          in: query
+          schema:
+            type: string
+            example: merchant,creator,skus,services,service_prices
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: auto
+      responses:
+        '200':
+          description: ''
+    put:
+      parameters:
+        - in: path
+          name: product_code
+          schema:
+            type: string
+          required: true
+          description: Product Code
+      tags:
+        - Product
+      summary: Update Product
+      description: Update Product
+      operationId: updateProduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  example: alohar12446767676
+                description:
+                  type: string
+                  example: demo aloha loha
+                height:
+                  type: number
+                  example: 10
+                length:
+                  type: number
+                  example: 30
+                name:
+                  type: string
+                  example: Aloha
+                price:
+                  type: number
+                  example: 1000
+                weight:
+                  type: number
+                  example: 0.5
+                width:
+                  type: number
+                  example: 20
+            examples:
+              Update Product:
+                value:
+                  code: alohar12446767676
+                  description: demo aloha loha
+                  height: 10
+                  length: 30
+                  name: Aloha
+                  price: 1000
+                  weight: 0.5
+                  width: 20
+      responses:
+        '200':
+          description: ''
+  /api/warehouses:
+    get:
+      tags:
+        - Warehoue
+      summary: List Warehouse
+      description: List Warehouse
+      operationId: listWarehouse
+      parameters:
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: auto
+        - name: code
+          in: query
+          schema:
+            type: string
+            example: fhuh
+      responses:
+        '200':
+          description: ''
+  /api/purchasing-packages:
+    get:
+      tags:
+        - Purchasing Package
+      summary: List Purchasing Package
+      description: List Purchasing Package
+      operationId: listPurchasingPackage
+      parameters:
+        - name: code
+          in: query
+          schema:
+            type: string
+            example: ZQuZXKtO
+        - name: created_at[from]
+          in: query
+          schema:
+            type: string
+            example: '2021-12-09'
+        - name: created_at[to]
+          in: query
+          schema:
+            type: string
+            example: '2021-12-10'
+        - name: destination_warehouse_id
+          in: query
+          schema:
+            type: string
+            example: '31'
+        - name: freight_bill_code
+          in: query
+          schema:
+            type: string
+            example: vd09122021
+        - name: shipping_partner_id
+          in: query
+          schema:
+            type: string
+            example: '3'
+        - name: sku_code
+          in: query
+          schema:
+            type: string
+            example: bongden1
+        - name: status
+          in: query
+          schema:
+            type: string
+            example: INIT
+          description: >
+            INIT // Khởi tạo, đối với kiện lô chưa về kho
+
+            PUTAWAY // Kiện về kho, kiện vừa được chuyển đến kho và tạo kiện
+            thành công trên hệ thống
+
+            TRANSPORTING // Vận chuyển
+
+            READY_FOR_DELIVERY // Chờ giao
+
+            REQUEST_FOR_DELIVERY // Yêu cầu giao
+
+            DELIVERING // Đang giao
+
+            DELIVERED // Đã nhận
+
+            MIA // Thất lạc kiện bị mất nói chung, hiện tại không tìm thấy
+
+            INACTIVE // Ngừng hoạt động không áp dụng tính phí và không rơi vào
+            những trường hợp không tính phí khác
+
+            WAIT_FOR_RETURN // Chờ trả hàng
+
+            RETURNING // Đang trả hàng
+
+            RETURNED // Đã trả hàng
+
+            WAIT_FOR_LIQUIDATION // Chờ thanh lý
+
+            LIQUIDATED // Đã thanh lý
+
+            REFUSED // Khách không nhận
+
+            IMPORTED // Đã nhập kho
+
+            CANCELED // Hủy
+        - name: include
+          in: query
+          schema:
+            type: string
+            example: >-
+              destination_warehouse.country,purchasing_package_services.service,purchasing_package_services.service_price,purchasing_package_item.sku
+          description: Dữ liệu lấy có thể optional theo nhu cầu
+        - name: per_page
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: page
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: amz
+        - name: sort_by
+          in: query
+          schema:
+            type: string
+            example: created_at
+          description: |-
+            Trường sắp xếp - Hỗ trợ:
+
+            created_at: thời gian tạo
+            updated_at: thời gian cập nhật
+            imported_at: thời gian nhập kho
+        - name: sort_by_value
+          in: query
+          schema:
+            type: string
+            example: DESC
+          description: 'Giá trị sắp xếp: DESC hoặc ASC'
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+        - Purchasing Package
+      summary: Create PurchasingPackage
+      description: Create PurchasingPackage
+      operationId: createPurchasingpackage
+      parameters:
+        - name: include
+          in: query
+          schema:
+            type: string
+            example: purchasing_package_item.sku
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  example: XXX
+                destination_warehouse_code:
+                  type: string
+                  example: XXX
+                freight_bill_code:
+                  type: string
+                  example: YYY
+                merchant_code:
+                  type: string
+                  example: amz
+                note:
+                  type: string
+                  example: asd
+                package_items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      quantity:
+                        type: number
+                        example: 1
+                      sku_code:
+                        type: string
+                        example: XXX
+                  example:
+                    - quantity: 1
+                      sku_code: XXX
+                weight:
+                  type: number
+                  example: 0.001
+            examples:
+              Create PurchasingPackage:
+                value:
+                  code: XXX
+                  destination_warehouse_code: XXX
+                  freight_bill_code: YYY
+                  merchant_code: amz
+                  note: asd
+                  package_items:
+                    - quantity: 1
+                      sku_code: XXX
+                  weight: 0.001
+      responses:
+        '200':
+          description: ''
+  /api/purchasing-packages/{package_code}:
+    get:
+      tags:
+        - Purchasing Package
+      summary: Detail Purchasing Package
+      description: Detail Purchasing Package
+      operationId: detailPurchasingPackage
+      parameters:
+        - in: path
+          name: package_code
+          schema:
+            type: string
+          required: true
+          description: Package Code
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: amz
+        - name: include
+          in: query
+          schema:
+            type: string
+            example: >-
+              purchasing_package_item,merchant,destination_warehouse.country,purchasing_package_services.service,purchasing_package_services.service_price,purchasing_package_item.sku
+          description: Dữ liệu lấy có thể optional theo nhu cầu
+      responses:
+        '200':
+          description: ''
+  /api/purchasing-packages/{package_code}/cancel:
+    put:
+      tags:
+        - Purchasing Package
+      summary: Cancel Purchasing Package
+      description: Cancel Purchasing Package
+      operationId: cancelPurchasingPackage
+      parameters:
+        - name: merchant_code
+          in: query
+          schema:
+            type: string
+            example: amz
+        - in: path
+          name: package_code
+          schema:
+            type: string
+          required: true
+          description: Package Code
+      responses:
+        '200':
+          description: ''
+  /api/skus/{code}/inventory:
+    get:
+      tags:
+        - Sku
+      summary: Inventory based on warehouse and SKU
+      description: Inventory based on warehouse and SKU
+      operationId: InventorySku
+      parameters:
+        - name: code
+          in: path
+          schema:
+            type: string
+            example: S001
+          required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    warehouse:
+                      type: string
+                      example: KHN
+                    quantity:
+                      type: string
+                      example: 10
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+security:
+  - bearerAuth: []
+tags:
+  - name: Order
+  - name: Product
+  - name: Warehoue
+  - name: Purchasing Package
