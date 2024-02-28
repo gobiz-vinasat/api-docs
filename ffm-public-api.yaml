@@ -59,11 +59,6 @@ paths:
           schema:
             type: string
             example: '1'
-        - name: merchant_code
-          in: query
-          schema:
-            type: string
-            example: auto
       responses:
         '200':
           description: Get Orders
@@ -993,12 +988,6 @@ paths:
       summary: Create Order
       description: Create Order
       operationId: createOrder
-      parameters:
-        - name: merchant_code
-          in: query
-          schema:
-            type: string
-            example: auto
       requestBody:
         content:
           application/json:
@@ -1339,11 +1328,6 @@ paths:
             type: string
             example: >-
               shipping_info,creator,order_skus.sku,warehouse,order_sku_combos.sku_combo
-        - name: merchant_code
-          in: query
-          schema:
-            type: string
-            example: auto
       responses:
         '200':
           description: Get Detail Order
@@ -2377,11 +2361,6 @@ paths:
           schema:
             type: string
             example: '1'
-        - name: merchant_code
-          in: query
-          schema:
-            type: string
-            example: auto
         - name: name
           in: query
           schema:
@@ -2981,12 +2960,6 @@ paths:
       summary: Create Product
       description: Create Product
       operationId: createProduct
-      parameters:
-        - name: merchant_code
-          in: query
-          schema:
-            type: string
-            example: auto
       requestBody:
         content:
           application/json:
@@ -3181,11 +3154,6 @@ paths:
           schema:
             type: string
             example: merchant,creator,skus,services,service_prices
-        - name: merchant_code
-          in: query
-          schema:
-            type: string
-            example: auto
       responses:
         '200':
           description: Get Product Detail
@@ -3857,11 +3825,6 @@ paths:
       description: List Warehouse
       operationId: listWarehouse
       parameters:
-        - name: merchant_code
-          in: query
-          schema:
-            type: string
-            example: auto
         - name: code
           in: query
           schema:
@@ -4379,11 +4342,6 @@ paths:
           schema:
             type: string
             example: '1'
-        - name: merchant_code
-          in: query
-          schema:
-            type: string
-            example: amz
         - name: sort_by
           in: query
           schema:
@@ -4710,11 +4668,6 @@ paths:
             type: string
           required: true
           description: Package Code
-        - name: merchant_code
-          in: query
-          schema:
-            type: string
-            example: auto
         - name: include
           in: query
           schema:
@@ -5123,10 +5076,15 @@ paths:
 components:
   securitySchemes:
     bearerAuth:
-      type: http
-      scheme: bearer
+          type: http
+          scheme: bearer
+    merchantCode:
+       type: apiKey
+       in: header
+       name: X-Merchant-Code
 security:
   - bearerAuth: []
+  - merchantCode: []
 tags:
   - name: Order
   - name: Product
