@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: FFM Public Api
   version: 1.0.0
-  contact: {}
+  contact: { }
 servers:
   - url: https://api.ffm.gobizdev.com
 paths:
@@ -482,7 +482,7 @@ paths:
                                       safety_stock: null
                                       status: ON_SELL
                                       warehouse_stocks:
-                                        data: []
+                                        data: [ ]
                                       weight: 30
                                       width: null
                                   sku_id: 1515
@@ -737,7 +737,7 @@ paths:
                                   safety_stock: null
                                   status: ON_SELL
                                   warehouse_stocks:
-                                    data: []
+                                    data: [ ]
                                   weight: 30
                                   width: null
                               sku_id: 1515
@@ -925,7 +925,7 @@ paths:
                                   safety_stock: null
                                   status: ON_SELL
                                   warehouse_stocks:
-                                    data: []
+                                    data: [ ]
                                   weight: 30
                                   width: null
                               sku_id: 1515
@@ -993,6 +993,14 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - receiver_name
+                - receiver_address
+                - receiver_phone
+                - receiver_country_code
+                - receiver_province_code
+                - receiver_district_code
+                - skus
               properties:
                 campaign:
                   type: string
@@ -1045,7 +1053,7 @@ paths:
                 ref_code:
                   type: string
                   example: aloha115578
-                  description: Reference Code 
+                  description: Reference Code
                 shipping_partner_code:
                   type: string
                   example: HN-01
@@ -1425,8 +1433,8 @@ paths:
                         properties:
                           data:
                             type: array
-                            items: {}
-                            example: []
+                            items: { }
+                            example: [ ]
                       order_skus:
                         type: object
                         properties:
@@ -1739,7 +1747,7 @@ paths:
                                     safety_stock: null
                                     status: ON_SELL
                                     warehouse_stocks:
-                                      data: []
+                                      data: [ ]
                                     weight: 30
                                     width: null
                                 sku_id: 1515
@@ -1908,7 +1916,7 @@ paths:
                       midmile_shipping_amount: 0
                       order_amount: 1000
                       order_sku_combos:
-                        data: []
+                        data: [ ]
                       order_skus:
                         data:
                           - name: Dép quai ngang nữ xinh xắn
@@ -1999,7 +2007,7 @@ paths:
                                 safety_stock: null
                                 status: ON_SELL
                                 warehouse_stocks:
-                                  data: []
+                                  data: [ ]
                                 weight: 30
                                 width: null
                             sku_id: 1515
@@ -2685,8 +2693,8 @@ paths:
                                     properties:
                                       data:
                                         type: array
-                                        items: {}
-                                        example: []
+                                        items: { }
+                                        example: [ ]
                                   weight:
                                     type: number
                                     example: 40
@@ -2714,7 +2722,7 @@ paths:
                                   safety_stock: null
                                   status: ON_SELL
                                   warehouse_stocks:
-                                    data: []
+                                    data: [ ]
                                   weight: 40
                                   width: null
                         status:
@@ -2803,7 +2811,7 @@ paths:
                               safety_stock: null
                               status: ON_SELL
                               warehouse_stocks:
-                                data: []
+                                data: [ ]
                               weight: 40
                               width: null
                         status: ON_SELL
@@ -2917,7 +2925,7 @@ paths:
                               safety_stock: null
                               status: ON_SELL
                               warehouse_stocks:
-                                data: []
+                                data: [ ]
                               weight: 40
                               width: null
                         status: ON_SELL
@@ -2943,6 +2951,8 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - name
               properties:
                 category_id:
                   type: number
@@ -2955,11 +2965,11 @@ paths:
                 description:
                   type: string
                   example: Demo sản phẩm
-                  description: Product Description 
+                  description: Product Description
                 height:
                   type: number
                   example: 10
-                  description: Height Of Product 
+                  description: Height Of Product
                 length:
                   type: number
                   example: 30
@@ -3544,8 +3554,8 @@ paths:
                                   properties:
                                     data:
                                       type: array
-                                      items: {}
-                                      example: []
+                                      items: { }
+                                      example: [ ]
                                 weight:
                                   type: number
                                   example: 40
@@ -3573,7 +3583,7 @@ paths:
                                 safety_stock: null
                                 status: ON_SELL
                                 warehouse_stocks:
-                                  data: []
+                                  data: [ ]
                                 weight: 40
                                 width: null
                       status:
@@ -3741,7 +3751,7 @@ paths:
                             safety_stock: null
                             status: ON_SELL
                             warehouse_stocks:
-                              data: []
+                              data: [ ]
                             weight: 40
                             width: null
                       status: ON_SELL
@@ -4073,8 +4083,8 @@ paths:
                             example: 1
                           links:
                             type: array
-                            items: {}
-                            example: []
+                            items: { }
+                            example: [ ]
                           per_page:
                             type: number
                             example: 15
@@ -4224,7 +4234,7 @@ paths:
                       pagination:
                         count: 8
                         current_page: 1
-                        links: []
+                        links: [ ]
                         per_page: 15
                         total: 8
                         total_pages: 1
@@ -4414,8 +4424,8 @@ paths:
                           properties:
                             data:
                               type: array
-                              items: {}
-                              example: []
+                              items: { }
+                              example: [ ]
                         destination_warehouse_id:
                           nullable: true
                           example: null
@@ -4451,15 +4461,15 @@ paths:
                           properties:
                             data:
                               type: array
-                              items: {}
-                              example: []
+                              items: { }
+                              example: [ ]
                         purchasing_package_services:
                           type: object
                           properties:
                             data:
                               type: array
-                              items: {}
-                              example: []
+                              items: { }
+                              example: [ ]
                         quantity:
                           type: number
                           example: 0
@@ -4489,7 +4499,7 @@ paths:
                         created_at: '2024-02-28T02:31:25Z'
                         creator_id: 0
                         destination_warehouse:
-                          data: []
+                          data: [ ]
                         destination_warehouse_id: null
                         finance_status: UNPAID
                         freight_bill_code: '26491709087455'
@@ -4501,9 +4511,9 @@ paths:
                         merchant_id: 10
                         note: null
                         purchasing_package_item:
-                          data: []
+                          data: [ ]
                         purchasing_package_services:
-                          data: []
+                          data: [ ]
                         quantity: 0
                         received_quantity: null
                         service_amount: null
@@ -4526,8 +4536,8 @@ paths:
                             example: 1
                           links:
                             type: array
-                            items: {}
-                            example: []
+                            items: { }
+                            example: [ ]
                           per_page:
                             type: number
                             example: 20
@@ -4545,7 +4555,7 @@ paths:
                         created_at: '2024-02-28T02:31:25Z'
                         creator_id: 0
                         destination_warehouse:
-                          data: []
+                          data: [ ]
                         destination_warehouse_id: null
                         finance_status: UNPAID
                         freight_bill_code: '26491709087455'
@@ -4557,9 +4567,9 @@ paths:
                         merchant_id: 10
                         note: null
                         purchasing_package_item:
-                          data: []
+                          data: [ ]
                         purchasing_package_services:
-                          data: []
+                          data: [ ]
                         quantity: 0
                         received_quantity: null
                         service_amount: null
@@ -4572,7 +4582,7 @@ paths:
                       pagination:
                         count: 1
                         current_page: 1
-                        links: []
+                        links: [ ]
                         per_page: 20
                         total: 1
                         total_pages: 1
@@ -4593,6 +4603,9 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - destination_warehouse_id
+                - package_items
               properties:
                 code:
                   type: string
@@ -4731,8 +4744,8 @@ paths:
                         properties:
                           data:
                             type: array
-                            items: {}
-                            example: []
+                            items: { }
+                            example: [ ]
                       destination_warehouse_id:
                         nullable: true
                         example: null
@@ -4804,15 +4817,15 @@ paths:
                         properties:
                           data:
                             type: array
-                            items: {}
-                            example: []
+                            items: { }
+                            example: [ ]
                       purchasing_package_services:
                         type: object
                         properties:
                           data:
                             type: array
-                            items: {}
-                            example: []
+                            items: { }
+                            example: [ ]
                       quantity:
                         type: number
                         example: 0
@@ -4845,7 +4858,7 @@ paths:
                       created_at: '2024-02-28T02:31:25Z'
                       creator_id: 0
                       destination_warehouse:
-                        data: []
+                        data: [ ]
                       destination_warehouse_id: null
                       finance_status: UNPAID
                       freight_bill_code: '26491709087455'
@@ -4869,9 +4882,9 @@ paths:
                       merchant_id: 10
                       note: null
                       purchasing_package_item:
-                        data: []
+                        data: [ ]
                       purchasing_package_services:
-                        data: []
+                        data: [ ]
                       quantity: 0
                       received_quantity: null
                       service_amount: null
@@ -5067,15 +5080,15 @@ paths:
 components:
   securitySchemes:
     bearerAuth:
-          type: http
-          scheme: bearer
+      type: http
+      scheme: bearer
     merchantCode:
-       type: apiKey
-       in: header
-       name: X-Merchant-Code
+      type: apiKey
+      in: header
+      name: X-Merchant-Code
 security:
-  - bearerAuth: []
-  - merchantCode: []
+  - bearerAuth: [ ]
+  - merchantCode: [ ]
 tags:
   - name: Order
   - name: Product
