@@ -1009,33 +1009,6 @@ paths:
                 intended_delivery_at:
                   type: string
                   example: '2023-01-02T21:11:59Z'
-                payment:
-                  type: object
-                  properties:
-                    bank_account:
-                      type: string
-                      example: sdadads
-                    bank_name:
-                      type: string
-                      example: asdasd
-                    payment_amount:
-                      type: string
-                      example: '100000'
-                    payment_method:
-                      type: string
-                      example: CASH
-                    payment_note:
-                      type: string
-                      example: Quisquam
-                    payment_time:
-                      type: string
-                      example: '2023-04-12T02:55:40.809Z'
-                    payment_type:
-                      type: string
-                      example: ADVANCE_PAYMENT
-                    standard_code:
-                      type: string
-                      example: aaa
                 receiver_address:
                   type: string
                   example: Trieu Khuc
@@ -1096,15 +1069,6 @@ paths:
                   discount_amount: 10
                   freight_bill_code: ''
                   intended_delivery_at: '2023-01-02T21:11:59Z'
-                  payment:
-                    bank_account: sdadads
-                    bank_name: asdasd
-                    payment_amount: '100000'
-                    payment_method: CASH
-                    payment_note: Quisquam
-                    payment_time: '2023-04-12T02:55:40.809Z'
-                    payment_type: ADVANCE_PAYMENT
-                    standard_code: aaa
                   receiver_address: Trieu Khuc
                   receiver_country_code: thailand
                   receiver_district_code: THAI_118786
