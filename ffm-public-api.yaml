@@ -993,6 +993,13 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - receiver_name
+                - receiver_address
+                - receiver_phone
+                - receiver_country_code
+                - receiver_province_code
+                - receiver_district_code
               properties:
                 campaign:
                   type: string
@@ -2943,6 +2950,8 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - name
               properties:
                 category_id:
                   type: number
@@ -4593,6 +4602,9 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+               - destination_warehouse_id
+               - package_items
               properties:
                 code:
                   type: string
