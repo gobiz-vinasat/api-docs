@@ -2087,8 +2087,6 @@ paths:
             examples:
               Update Order:
                 value:
-                  code: aloha115578
-                  merchant_code: auto
                   receiver_postal_code: '0099900'
                   ref_code: aloha115578
                   skus:
@@ -2286,7 +2284,7 @@ paths:
                       total_amount: 15000
                       updated_at: '2024-02-28T02:55:34.000000Z'
   /api/orders/{order_code}/cancel:
-    post:
+    put:
       tags:
         - Order
       summary: Cancel Order
