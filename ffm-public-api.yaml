@@ -2047,12 +2047,6 @@ paths:
             schema:
               type: object
               properties:
-                code:
-                  type: string
-                  example: aloha115578
-                merchant_code:
-                  type: string
-                  example: auto
                 receiver_postal_code:
                   type: string
                   example: '0099900'
@@ -2087,8 +2081,6 @@ paths:
             examples:
               Update Order:
                 value:
-                  code: aloha115578
-                  merchant_code: auto
                   receiver_postal_code: '0099900'
                   ref_code: aloha115578
                   skus:
