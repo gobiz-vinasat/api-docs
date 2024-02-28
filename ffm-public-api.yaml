@@ -2050,9 +2050,6 @@ paths:
                 code:
                   type: string
                   example: aloha115578
-                merchant_code:
-                  type: string
-                  example: auto
                 receiver_postal_code:
                   type: string
                   example: '0099900'
@@ -4578,9 +4575,6 @@ paths:
                 freight_bill_code:
                   type: string
                   example: YYY
-                merchant_code:
-                  type: string
-                  example: amz
                 note:
                   type: string
                   example: asd
@@ -4607,7 +4601,6 @@ paths:
                   code: XXX
                   destination_warehouse_code: XXX
                   freight_bill_code: YYY
-                  merchant_code: amz
                   note: asd
                   package_items:
                     - quantity: 1
