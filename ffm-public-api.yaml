@@ -997,45 +997,59 @@ paths:
                 campaign:
                   type: string
                   example: cam990088
+                  description: Campaign Code
                 description:
                   type: string
                   example: note tạm
+                  description: Note content
                 discount_amount:
                   type: number
                   example: 10
+                  description: Total Amount Discount For Order
                 freight_bill_code:
                   type: string
                   example: ''
+                  description: Tracking Number Order
                 intended_delivery_at:
                   type: string
                   example: '2023-01-02T21:11:59Z'
+                  description: Intended Delivery Date
                 receiver_address:
                   type: string
                   example: Trieu Khuc
+                  description: Address of receiver
                 receiver_country_code:
                   type: string
                   example: thailand
+                  description: Country code of receiver (Mapping With FFM System)
                 receiver_district_code:
                   type: string
                   example: THAI_118786
+                  description: District code of receiver (Mapping With FFM System)
                 receiver_name:
                   type: string
                   example: Hoang Long
+                  description: Name of receiver
                 receiver_phone:
                   type: string
                   example: '0396822222'
+                  description: Phone of receiver
                 receiver_postal_code:
                   type: string
                   example: '0099900'
+                  description: Postal Code receiver
                 receiver_province_code:
                   type: string
                   example: THAI_118785
+                  description: Province code of receiver (Mapping With FFM System)
                 ref_code:
                   type: string
                   example: aloha115578
+                  description: Reference Code 
                 shipping_partner_code:
                   type: string
                   example: HN-01
+                  description: Shipping Partner Code (Ex ShopeeExpress,...)
                 skus:
                   type: array
                   items:
@@ -1044,15 +1058,19 @@ paths:
                       code:
                         type: string
                         example: 2550426569-1705308794992-0
+                        description: Sku Code (Get Code From Detail Product)
                       discount_amount:
                         type: number
                         example: 1000
+                        description: Total Amount Discount For This Sku
                       price:
                         type: number
                         example: 123444
+                        description: Price Of Sku
                       quantity:
                         type: number
                         example: 2
+                        description: Quantity Of Sku
                   example:
                     - code: 2550426569-1705308794992-0
                       discount_amount: 1000
@@ -1061,6 +1079,7 @@ paths:
                 total_amount:
                   type: number
                   example: 300000
+                  description: Total Amount For This Order
             examples:
               Create Order:
                 value:
@@ -2928,30 +2947,39 @@ paths:
                 category_id:
                   type: number
                   example: 12
+                  description: Id Category (FFM System Id)
                 code:
                   type: string
                   example: SKUAlohademoaaarra
+                  description: Product Code
                 description:
                   type: string
                   example: Demo sản phẩm
+                  description: Product Description 
                 height:
                   type: number
                   example: 10
+                  description: Height Of Product 
                 length:
                   type: number
                   example: 30
+                  description: Length Of Product
                 name:
                   type: string
                   example: aloha
+                  description: Name Of Product
                 price:
                   type: number
                   example: 1000
+                  description: Price Of Product
                 weight:
                   type: number
                   example: 0.5
+                  description: Weight Of Product
                 width:
                   type: number
                   example: 20
+                  description: Width Of Product
             examples:
               Create Product:
                 value:
@@ -4569,15 +4597,19 @@ paths:
                 code:
                   type: string
                   example: XXX
+                  description: Purchasing Package Code
                 destination_warehouse_code:
                   type: string
                   example: XXX
+                  description: Destination Warehouse Code (Get From Warehouse Api)
                 freight_bill_code:
                   type: string
                   example: YYY
+                  description: Tracking Number Of Purchasing Package
                 note:
                   type: string
                   example: asd
+                  description: Note Of Purchasing Package
                 package_items:
                   type: array
                   items:
@@ -4586,15 +4618,18 @@ paths:
                       quantity:
                         type: number
                         example: 1
+                        description: Quantity Of Sku
                       sku_code:
                         type: string
                         example: XXX
+                        description: Sku Code
                   example:
                     - quantity: 1
                       sku_code: XXX
                 weight:
                   type: number
                   example: 0.001
+                  description: Weight Of Purchasing Package
             examples:
               Create PurchasingPackage:
                 value:
