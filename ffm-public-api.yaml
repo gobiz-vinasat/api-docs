@@ -995,6 +995,7 @@ paths:
               type: object
               required:
                 - marketplace
+                - marchant_code
                 - receiver_name
                 - receiver_address
                 - receiver_phone
@@ -1102,6 +1103,7 @@ paths:
                 value:
                   marketplace: TIKTOKSHOP
                   merchant_code: shantou
+                  ref_code: aloha115578
                   campaign: cam990088
                   description: note tạm
                   discount_amount: 10
@@ -1114,7 +1116,6 @@ paths:
                   receiver_phone: '0396822222'
                   receiver_postal_code: '0099900'
                   receiver_province_code: THAI_118785
-                  ref_code: aloha115578
                   shipping_partner_code: HN-01
                   skus:
                     - code: 2550426569-1705308794992-0
@@ -2084,10 +2085,9 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - marchant_code
               properties:
-                code:
-                  type: string
-                  example: aloha115578
                 merchant_code:
                   type: string
                   example: shantou
@@ -2166,7 +2166,6 @@ paths:
             examples:
               Update Order:
                 value:
-                  code: 2550426569-1705308794992
                   merchant_code: shantou
                   receiver_postal_code: '0099900'
                   description: 'description'
@@ -2186,7 +2185,6 @@ paths:
                       price: 30000
                       quantity: 2
                   total_amount: 30000
-                  cod: 500
       responses:
         '200':
           description: Update Order
