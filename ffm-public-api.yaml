@@ -104,7 +104,7 @@ paths:
                 type: string
                 example: PHP/7.4.26
           content:
-            application/json:
+            application/x-www-form-urlencoded:
               schema:
                 type: object
                 properties:
@@ -989,8 +989,9 @@ paths:
       description: Create Order
       operationId: createOrder
       requestBody:
+        required: true
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               type: object
               required:
@@ -1003,6 +1004,7 @@ paths:
                 - receiver_province_code
                 - receiver_district_code
                 - skus
+                - ref_code
               properties:
                 marketplace:
                   type: string
@@ -1012,26 +1014,10 @@ paths:
                   type: string
                   example: shantou
                   description: marchant Code
-                campaign:
+                ref_code:
                   type: string
-                  example: cam990088
-                  description: Campaign Code
-                description:
-                  type: string
-                  example: note tạm
-                  description: Note content
-                discount_amount:
-                  type: number
-                  example: 10
-                  description: Total Amount Discount For Order
-                freight_bill_code:
-                  type: string
-                  example: ''
-                  description: Tracking Number Order
-                intended_delivery_at:
-                  type: string
-                  example: '2023-01-02T21:11:59Z'
-                  description: Intended Delivery Date
+                  example: aloha115578
+                  description: Reference Code
                 receiver_address:
                   type: string
                   example: Trieu Khuc
@@ -1052,18 +1038,34 @@ paths:
                   type: string
                   example: '0396822222'
                   description: Phone of receiver
-                receiver_postal_code:
-                  type: string
-                  example: '0099900'
-                  description: Postal Code receiver
                 receiver_province_code:
                   type: string
                   example: THAI_118785
                   description: Province code of receiver (Mapping With FFM System)
-                ref_code:
+                receiver_postal_code:
                   type: string
-                  example: aloha115578
-                  description: Reference Code
+                  example: '0099900'
+                  description: Postal Code receiver
+                campaign:
+                  type: string
+                  example: cam990088
+                  description: Campaign Code
+                description:
+                  type: string
+                  example: note tạm
+                  description: Note content
+                discount_amount:
+                  type: number
+                  example: 10
+                  description: Total Amount Discount For Order
+                freight_bill_code:
+                  type: string
+                  example: ''
+                  description: Tracking Number Order
+                intended_delivery_at:
+                  type: string
+                  example: '2023-01-02T21:11:59Z'
+                  description: Intended Delivery Date
                 shipping_partner_code:
                   type: string
                   example: HN-01
@@ -1168,7 +1170,7 @@ paths:
                 type: string
                 example: PHP/7.4.26
           content:
-            application/json:
+            application/x-www-form-urlencoded:
               schema:
                 type: object
                 properties:
@@ -1376,7 +1378,7 @@ paths:
                 type: string
                 example: PHP/7.4.26
           content:
-            application/json:
+            application/x-www-form-urlencoded:
               schema:
                 type: object
                 properties:
@@ -2082,11 +2084,11 @@ paths:
           description: Order Code
       requestBody:
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               type: object
               required:
-                - marchant_code
+                - merchant_code
               properties:
                 merchant_code:
                   type: string
@@ -2230,7 +2232,7 @@ paths:
                 type: string
                 example: PHP/7.4.26
           content:
-            application/json:
+            application/x-www-form-urlencoded:
               schema:
                 type: object
                 properties:
@@ -2513,7 +2515,7 @@ paths:
                 type: string
                 example: PHP/7.4.26
           content:
-            application/json:
+            application/x-www-form-urlencoded:
               schema:
                 type: object
                 properties:
@@ -3014,7 +3016,7 @@ paths:
       operationId: createProduct
       requestBody:
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               type: object
               required:
@@ -3113,7 +3115,7 @@ paths:
                 type: string
                 example: PHP/7.4.26
           content:
-            application/json:
+            application/x-www-form-urlencoded:
               schema:
                 type: object
                 properties:
@@ -3262,7 +3264,7 @@ paths:
                 type: string
                 example: PHP/7.4.26
           content:
-            application/json:
+            application/x-www-form-urlencoded:
               schema:
                 type: object
                 properties:
@@ -3838,7 +3840,7 @@ paths:
           description: Product Code
       requestBody:
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               type: object
               properties:
@@ -3940,7 +3942,7 @@ paths:
                 type: string
                 example: PHP/7.4.26
           content:
-            application/json:
+            application/x-www-form-urlencoded:
               schema:
                 type: object
                 properties:
@@ -4467,7 +4469,7 @@ paths:
                 type: string
                 example: PHP/7.4.26
           content:
-            application/json:
+            application/x-www-form-urlencoded:
               schema:
                 type: object
                 properties:
@@ -4666,7 +4668,7 @@ paths:
             example: purchasing_package_item.sku
       requestBody:
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               type: object
               required:
@@ -4789,7 +4791,7 @@ paths:
                 type: string
                 example: PHP/7.4.26
           content:
-            application/json:
+            application/x-www-form-urlencoded:
               schema:
                 type: object
                 properties:
@@ -5018,7 +5020,7 @@ paths:
                 type: string
                 example: PHP/7.4.26
           content:
-            application/json:
+            application/x-www-form-urlencoded:
               schema:
                 type: object
                 properties:
@@ -5131,7 +5133,7 @@ paths:
         '200':
           description: ''
           content:
-            application/json:
+            application/x-www-form-urlencoded:
               schema:
                 type: array
                 items:
