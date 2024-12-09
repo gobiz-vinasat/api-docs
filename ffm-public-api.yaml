@@ -996,15 +996,12 @@ paths:
               type: object
               required:
                 - marketplace
-                - marchant_code
+                - merchant_code
+                - ref_code
                 - receiver_name
                 - receiver_address
                 - receiver_phone
-                - receiver_country_code
-                - receiver_province_code
-                - receiver_district_code
                 - skus
-                - ref_code
               properties:
                 marketplace:
                   type: string
@@ -1022,14 +1019,6 @@ paths:
                   type: string
                   example: Trieu Khuc
                   description: Address of receiver
-                receiver_country_code:
-                  type: string
-                  example: thailand
-                  description: Country code of receiver (Mapping With FFM System)
-                receiver_district_code:
-                  type: string
-                  example: THAI_118786
-                  description: District code of receiver (Mapping With FFM System)
                 receiver_name:
                   type: string
                   example: Hoang Long
@@ -1038,38 +1027,6 @@ paths:
                   type: string
                   example: '0396822222'
                   description: Phone of receiver
-                receiver_province_code:
-                  type: string
-                  example: THAI_118785
-                  description: Province code of receiver (Mapping With FFM System)
-                receiver_postal_code:
-                  type: string
-                  example: '0099900'
-                  description: Postal Code receiver
-                campaign:
-                  type: string
-                  example: cam990088
-                  description: Campaign Code
-                description:
-                  type: string
-                  example: note tạm
-                  description: Note content
-                discount_amount:
-                  type: number
-                  example: 10
-                  description: Total Amount Discount For Order
-                freight_bill_code:
-                  type: string
-                  example: ''
-                  description: Tracking Number Order
-                intended_delivery_at:
-                  type: string
-                  example: '2023-01-02T21:11:59Z'
-                  description: Intended Delivery Date
-                shipping_partner_code:
-                  type: string
-                  example: HN-01
-                  description: Shipping Partner Code (Ex ShopeeExpress,...)
                 skus:
                   type: array
                   items:
@@ -1096,6 +1053,50 @@ paths:
                       discount_amount: 1000
                       price: 123444
                       quantity: 2
+                receiver_country_code:
+                  type: string
+                  example: thailand
+                  description: Country code of receiver (Mapping With FFM System)
+                receiver_district_code:
+                  type: string
+                  example: THAI_118786
+                  description: District code of receiver (Mapping With FFM System)
+                receiver_province_code:
+                  type: string
+                  example: THAI_118785
+                  description: Province code of receiver (Mapping With FFM System)
+                receiver_postal_code:
+                  type: string
+                  example: '0099900'
+                  description: Postal Code receiver
+                currency:
+                  type: string
+                  example: VND
+                  description: currency Code
+                campaign:
+                  type: string
+                  example: cam990088
+                  description: Campaign Code
+                description:
+                  type: string
+                  example: note tạm
+                  description: Note content
+                discount_amount:
+                  type: number
+                  example: 10
+                  description: Total Amount Discount For Order
+                freight_bill_code:
+                  type: string
+                  example: ''
+                  description: Tracking Number Order
+                intended_delivery_at:
+                  type: string
+                  example: '2023-01-02T21:11:59Z'
+                  description: Intended Delivery Date
+                shipping_partner_code:
+                  type: string
+                  example: HN-01
+                  description: Shipping Partner Code (Ex ShopeeExpress,...)
                 total_amount:
                   type: number
                   example: 300000
@@ -1106,6 +1107,7 @@ paths:
                   marketplace: TIKTOKSHOP
                   merchant_code: shantou
                   ref_code: aloha115578
+                  currency: VND
                   campaign: cam990088
                   description: note tạm
                   discount_amount: 10
@@ -2165,6 +2167,9 @@ paths:
                 total_amount:
                   type: number
                   example: 15000
+                cod:
+                  type: number
+                  example: 1000
             examples:
               Update Order:
                 value:
@@ -2187,6 +2192,7 @@ paths:
                       price: 30000
                       quantity: 2
                   total_amount: 30000
+                  cod: 10000
       responses:
         '200':
           description: Update Order
