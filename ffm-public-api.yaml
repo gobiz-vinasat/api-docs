@@ -998,6 +998,7 @@ paths:
                 - marketplace
                 - merchant_code
                 - ref_code
+                - warehouse_code
                 - receiver_name
                 - receiver_address
                 - receiver_phone
@@ -1015,6 +1016,10 @@ paths:
                   type: string
                   example: aloha115578
                   description: Reference Code
+                warehouse_code:
+                  type: string
+                  example: HN
+                  description: Warehouse Code
                 receiver_address:
                   type: string
                   example: Trieu Khuc
@@ -1072,7 +1077,7 @@ paths:
                 currency:
                   type: string
                   example: VND
-                  description: currency Code
+                  description: Currency Code (default VND)
                 campaign:
                   type: string
                   example: cam990088
@@ -1089,10 +1094,6 @@ paths:
                   type: string
                   example: ''
                   description: Tracking Number Order
-                intended_delivery_at:
-                  type: string
-                  example: '2023-01-02T21:11:59Z'
-                  description: Intended Delivery Date
                 shipping_partner_code:
                   type: string
                   example: HN-01
@@ -1101,12 +1102,17 @@ paths:
                   type: number
                   example: 300000
                   description: Total Amount For This Order
+                intended_delivery_at:
+                  type: string
+                  example: '2023-01-02T21:11:59Z'
+                  description: Intended Delivery Date
             examples:
               Create Order:
                 value:
                   marketplace: TIKTOKSHOP
                   merchant_code: shantou
                   ref_code: aloha115578
+                  warehouse_code: HN
                   currency: VND
                   campaign: cam990088
                   description: note tạm
@@ -1120,7 +1126,7 @@ paths:
                   receiver_phone: '0396822222'
                   receiver_postal_code: '0099900'
                   receiver_province_code: THAI_118785
-                  shipping_partner_code: HN-01
+                  shipping_partner_code: JNTP-01
                   skus:
                     - code: 2550426569-1705308794992-0
                       discount_amount: 1000
