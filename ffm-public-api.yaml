@@ -2401,6 +2401,27 @@ paths:
             type: string
           required: true
           description: Order Code
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - merchant_code
+                - cancel_reason
+              properties:
+                merchant_code:
+                  type: string
+                  example: shantou
+                  description: merchant code
+                cancel_reason:
+                  type: string
+                  example: CUSTOMER,
+                  description: reason code (CUSTOMER | SELLER | ODZ | DUPLICATED | OTHER)
+                cancel_note:
+                  type: string
+                  example: cancel note
+                  description: note
       responses:
         '200':
           description: ''
