@@ -148,7 +148,7 @@ paths:
                                   example: Nguyễn Diệp Anh
                         currency:
                           type: string
-                          example: VIE
+                          example: VND
                         description:
                           nullable: true
                           example: null
@@ -639,7 +639,7 @@ paths:
                           data:
                             id: 2
                             name: Nguyễn Diệp Anh
-                        currency: VIE
+                        currency: VND
                         description: null
                         extent_service_amount: 0
                         finance_service_status: UNPAID
@@ -999,7 +999,6 @@ paths:
                 - merchant_code
                 - ref_code
                 - warehouse_code
-                - receiver_name
                 - receiver_address
                 - receiver_phone
                 - skus
@@ -1041,10 +1040,6 @@ paths:
                         type: string
                         example: 2550426569-1705308794992-0
                         description: Sku Code (Get Code From Detail Product)
-                      discount_amount:
-                        type: number
-                        example: 1000
-                        description: Total Amount Discount For This Sku
                       price:
                         type: number
                         example: 123444
@@ -1077,7 +1072,7 @@ paths:
                 currency:
                   type: string
                   example: VND
-                  description: Currency Code (default VND)
+                  description: Currency Code VND | CNY (default VND)
                 campaign:
                   type: string
                   example: cam990088
@@ -1086,10 +1081,6 @@ paths:
                   type: string
                   example: note tạm
                   description: Note content
-                discount_amount:
-                  type: number
-                  example: 10
-                  description: Total Amount Discount For Order
                 freight_bill_code:
                   type: string
                   example: ''
@@ -1113,10 +1104,9 @@ paths:
                   merchant_code: shantou
                   ref_code: aloha115578
                   warehouse_code: HN
-                  currency: VND
+                  currency: VIE
                   campaign: cam990088
                   description: note tạm
-                  discount_amount: 10
                   freight_bill_code: ''
                   intended_delivery_at: '2023-01-02T21:11:59Z'
                   receiver_address: Trieu Khuc
@@ -1129,7 +1119,6 @@ paths:
                   shipping_partner_code: JNTP-01
                   skus:
                     - code: 2550426569-1705308794992-0
-                      discount_amount: 1000
                       price: 123444
                       quantity: 2
                   total_amount: 300000
@@ -2101,9 +2090,6 @@ paths:
                 merchant_code:
                   type: string
                   example: shantou
-                status:
-                  type: string
-                  example: ''
                 description:
                   type: string
                   example: note tạm
@@ -2148,28 +2134,6 @@ paths:
                   type: string
                   example: HN-01
                   description: Shipping Partner Code (Ex ShopeeExpress,...)
-                skus:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      code:
-                        type: string
-                        example: 2550426569-1705308794992-0
-                      discount_amount:
-                        type: number
-                        example: 0
-                      price:
-                        type: number
-                        example: 30000
-                      quantity:
-                        type: number
-                        example: 2
-                  example:
-                    - code: 2550426569-1705308794992-0
-                      discount_amount: 0
-                      price: 30000
-                      quantity: 2
                 total_amount:
                   type: number
                   example: 15000
@@ -2191,12 +2155,6 @@ paths:
                   freight_bill_url: ''
                   freight_bill_code: KJ04545455454
                   shipping_partner_code: HN-01
-                  status: ''
-                  skus:
-                    - code: 2550426569-1705308794992-0
-                      discount_amount: 0
-                      price: 30000
-                      quantity: 2
                   total_amount: 30000
                   cod: 10000
       responses:
