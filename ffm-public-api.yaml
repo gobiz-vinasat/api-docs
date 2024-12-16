@@ -2345,13 +2345,13 @@ paths:
                       status: WAITING_INSPECTION
                       total_amount: 15000
                       updated_at: '2024-02-28T02:55:34.000000Z'
-  /api/orders/{order_code}/cancel:
+  /api/orders/{order_code}/status:
     put:
       tags:
         - Order
-      summary: Cancel Order
-      description: Cancel Order
-      operationId: cancelOrder
+      summary: Change Order Status
+      description: Change Order Status
+      operationId: changeOrderStatus
       parameters:
         - in: path
           name: order_code
@@ -2366,12 +2366,16 @@ paths:
               type: object
               required:
                 - merchant_code
-                - cancel_reason
+                - status
               properties:
                 merchant_code:
                   type: string
                   example: shantou
                   description: merchant code
+                status:
+                  type: string
+                  example: DELIVERING,
+                  description: DELIVERING | DELIVERED | CANCELED | RETURN | FAILED_DELIVERY
                 cancel_reason:
                   type: string
                   example: CUSTOMER,
